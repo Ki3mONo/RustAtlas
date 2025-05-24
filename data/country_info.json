@@ -1,0 +1,1752 @@
+{
+  "eritrea": {
+    "name": "Eritrea",
+    "capital": "Asmara",
+    "area": 117600.0,
+    "population": 5352000,
+    "currency": "ERN"
+  },
+  "cameroon": {
+    "name": "Cameroon",
+    "capital": "Yaoundé",
+    "area": 475442.0,
+    "population": 26545864,
+    "currency": "XAF"
+  },
+  "montenegro": {
+    "name": "Montenegro",
+    "capital": "Podgorica",
+    "area": 13812.0,
+    "population": 621718,
+    "currency": "EUR"
+  },
+  "fiji": {
+    "name": "Fiji",
+    "capital": "Suva",
+    "area": 18272.0,
+    "population": 896444,
+    "currency": "FJD"
+  },
+  "tunisia": {
+    "name": "Tunisia",
+    "capital": "Tunis",
+    "area": 163610.0,
+    "population": 11818618,
+    "currency": "TND"
+  },
+  "senegal": {
+    "name": "Senegal",
+    "capital": "Dakar",
+    "area": 196722.0,
+    "population": 16743930,
+    "currency": "XOF"
+  },
+  "south_georgia": {
+    "name": "South Georgia",
+    "capital": "King Edward Point",
+    "area": 3903.0,
+    "population": 30,
+    "currency": "GBP"
+  },
+  "brazil": {
+    "name": "Brazil",
+    "capital": "Brasília",
+    "area": 8515767.0,
+    "population": 212559409,
+    "currency": "BRL"
+  },
+  "liechtenstein": {
+    "name": "Liechtenstein",
+    "capital": "Vaduz",
+    "area": 160.0,
+    "population": 38137,
+    "currency": "CHF"
+  },
+  "mexico": {
+    "name": "Mexico",
+    "capital": "Mexico City",
+    "area": 1964375.0,
+    "population": 128932753,
+    "currency": "MXN"
+  },
+  "palestine": {
+    "name": "Palestine",
+    "capital": "Ramallah",
+    "area": 6220.0,
+    "population": 4803269,
+    "currency": "EGP"
+  },
+  "greenland": {
+    "name": "Greenland",
+    "capital": "Nuuk",
+    "area": 2166086.0,
+    "population": 56367,
+    "currency": "DKK"
+  },
+  "united_states_minor_outlying_islands": {
+    "name": "United States Minor Outlying Islands",
+    "capital": "Washington DC",
+    "area": 34.2,
+    "population": 300,
+    "currency": "USD"
+  },
+  "equatorial_guinea": {
+    "name": "Equatorial Guinea",
+    "capital": "Malabo",
+    "area": 28051.0,
+    "population": 1402985,
+    "currency": "XAF"
+  },
+  "guadeloupe": {
+    "name": "Guadeloupe",
+    "capital": "Basse-Terre",
+    "area": 1628.0,
+    "population": 400132,
+    "currency": "EUR"
+  },
+  "saint_helena,_ascension_and_tristan_da_cunha": {
+    "name": "Saint Helena, Ascension and Tristan da Cunha",
+    "capital": "Jamestown",
+    "area": 394.0,
+    "population": 53192,
+    "currency": "GBP"
+  },
+  "turkey": {
+    "name": "Turkey",
+    "capital": "Ankara",
+    "area": 783562.0,
+    "population": 84339067,
+    "currency": "TRY"
+  },
+  "chad": {
+    "name": "Chad",
+    "capital": "N'Djamena",
+    "area": 1284000.0,
+    "population": 16425859,
+    "currency": "XAF"
+  },
+  "honduras": {
+    "name": "Honduras",
+    "capital": "Tegucigalpa",
+    "area": 112492.0,
+    "population": 9904608,
+    "currency": "HNL"
+  },
+  "austria": {
+    "name": "Austria",
+    "capital": "Vienna",
+    "area": 83871.0,
+    "population": 8917205,
+    "currency": "EUR"
+  },
+  "romania": {
+    "name": "Romania",
+    "capital": "Bucharest",
+    "area": 238391.0,
+    "population": 19286123,
+    "currency": "RON"
+  },
+  "gabon": {
+    "name": "Gabon",
+    "capital": "Libreville",
+    "area": 267668.0,
+    "population": 2225728,
+    "currency": "XAF"
+  },
+  "namibia": {
+    "name": "Namibia",
+    "capital": "Windhoek",
+    "area": 825615.0,
+    "population": 2540916,
+    "currency": "NAD"
+  },
+  "rwanda": {
+    "name": "Rwanda",
+    "capital": "Kigali",
+    "area": 26338.0,
+    "population": 12952209,
+    "currency": "RWF"
+  },
+  "saint_vincent_and_the_grenadines": {
+    "name": "Saint Vincent and the Grenadines",
+    "capital": "Kingstown",
+    "area": 389.0,
+    "population": 110947,
+    "currency": "XCD"
+  },
+  "bulgaria": {
+    "name": "Bulgaria",
+    "capital": "Sofia",
+    "area": 110879.0,
+    "population": 6927288,
+    "currency": "BGN"
+  },
+  "colombia": {
+    "name": "Colombia",
+    "capital": "Bogotá",
+    "area": 1141748.0,
+    "population": 50882884,
+    "currency": "COP"
+  },
+  "suriname": {
+    "name": "Suriname",
+    "capital": "Paramaribo",
+    "area": 163820.0,
+    "population": 586634,
+    "currency": "SRD"
+  },
+  "zimbabwe": {
+    "name": "Zimbabwe",
+    "capital": "Harare",
+    "area": 390757.0,
+    "population": 14862927,
+    "currency": "ZWL"
+  },
+  "venezuela": {
+    "name": "Venezuela",
+    "capital": "Caracas",
+    "area": 916445.0,
+    "population": 28435943,
+    "currency": "VES"
+  },
+  "eswatini": {
+    "name": "Eswatini",
+    "capital": "Mbabane",
+    "area": 17364.0,
+    "population": 1160164,
+    "currency": "SZL"
+  },
+  "philippines": {
+    "name": "Philippines",
+    "capital": "Manila",
+    "area": 342353.0,
+    "population": 109581085,
+    "currency": "PHP"
+  },
+  "turkmenistan": {
+    "name": "Turkmenistan",
+    "capital": "Ashgabat",
+    "area": 488100.0,
+    "population": 6031187,
+    "currency": "TMT"
+  },
+  "algeria": {
+    "name": "Algeria",
+    "capital": "Algiers",
+    "area": 2381741.0,
+    "population": 44700000,
+    "currency": "DZD"
+  },
+  "niger": {
+    "name": "Niger",
+    "capital": "Niamey",
+    "area": 1267000.0,
+    "population": 24206636,
+    "currency": "XOF"
+  },
+  "jamaica": {
+    "name": "Jamaica",
+    "capital": "Kingston",
+    "area": 10991.0,
+    "population": 2961161,
+    "currency": "JMD"
+  },
+  "armenia": {
+    "name": "Armenia",
+    "capital": "Yerevan",
+    "area": 29743.0,
+    "population": 2963234,
+    "currency": "AMD"
+  },
+  "caribbean_netherlands": {
+    "name": "Caribbean Netherlands",
+    "capital": "Kralendijk",
+    "area": 328.0,
+    "population": 25987,
+    "currency": "USD"
+  },
+  "solomon_islands": {
+    "name": "Solomon Islands",
+    "capital": "Honiara",
+    "area": 28896.0,
+    "population": 686878,
+    "currency": "SBD"
+  },
+  "cuba": {
+    "name": "Cuba",
+    "capital": "Havana",
+    "area": 109884.0,
+    "population": 11326616,
+    "currency": "CUC"
+  },
+  "french_southern_and_antarctic_lands": {
+    "name": "French Southern and Antarctic Lands",
+    "capital": "Port-aux-Français",
+    "area": 7747.0,
+    "population": 400,
+    "currency": "EUR"
+  },
+  "åland_islands": {
+    "name": "Åland Islands",
+    "capital": "Mariehamn",
+    "area": 1580.0,
+    "population": 29458,
+    "currency": "EUR"
+  },
+  "united_states_virgin_islands": {
+    "name": "United States Virgin Islands",
+    "capital": "Charlotte Amalie",
+    "area": 347.0,
+    "population": 106290,
+    "currency": "USD"
+  },
+  "liberia": {
+    "name": "Liberia",
+    "capital": "Monrovia",
+    "area": 111369.0,
+    "population": 5057677,
+    "currency": "LRD"
+  },
+  "sudan": {
+    "name": "Sudan",
+    "capital": "Khartoum",
+    "area": 1886068.0,
+    "population": 43849269,
+    "currency": "SDG"
+  },
+  "british_virgin_islands": {
+    "name": "British Virgin Islands",
+    "capital": "Road Town",
+    "area": 151.0,
+    "population": 30237,
+    "currency": "USD"
+  },
+  "tanzania": {
+    "name": "Tanzania",
+    "capital": "Dodoma",
+    "area": 945087.0,
+    "population": 59734213,
+    "currency": "TZS"
+  },
+  "croatia": {
+    "name": "Croatia",
+    "capital": "Zagreb",
+    "area": 56594.0,
+    "population": 4047200,
+    "currency": "EUR"
+  },
+  "andorra": {
+    "name": "Andorra",
+    "capital": "Andorra la Vella",
+    "area": 468.0,
+    "population": 77265,
+    "currency": "EUR"
+  },
+  "belize": {
+    "name": "Belize",
+    "capital": "Belmopan",
+    "area": 22966.0,
+    "population": 397621,
+    "currency": "BZD"
+  },
+  "barbados": {
+    "name": "Barbados",
+    "capital": "Bridgetown",
+    "area": 430.0,
+    "population": 287371,
+    "currency": "BBD"
+  },
+  "slovakia": {
+    "name": "Slovakia",
+    "capital": "Bratislava",
+    "area": 49037.0,
+    "population": 5458827,
+    "currency": "EUR"
+  },
+  "vatican_city": {
+    "name": "Vatican City",
+    "capital": "Vatican City",
+    "area": 0.44,
+    "population": 451,
+    "currency": "EUR"
+  },
+  "lebanon": {
+    "name": "Lebanon",
+    "capital": "Beirut",
+    "area": 10452.0,
+    "population": 6825442,
+    "currency": "LBP"
+  },
+  "moldova": {
+    "name": "Moldova",
+    "capital": "Chișinău",
+    "area": 33846.0,
+    "population": 2617820,
+    "currency": "MDL"
+  },
+  "finland": {
+    "name": "Finland",
+    "capital": "Helsinki",
+    "area": 338424.0,
+    "population": 5530719,
+    "currency": "EUR"
+  },
+  "taiwan": {
+    "name": "Taiwan",
+    "capital": "Taipei",
+    "area": 36193.0,
+    "population": 23503349,
+    "currency": "TWD"
+  },
+  "micronesia": {
+    "name": "Micronesia",
+    "capital": "Palikir",
+    "area": 702.0,
+    "population": 115021,
+    "currency": "USD"
+  },
+  "vietnam": {
+    "name": "Vietnam",
+    "capital": "Hanoi",
+    "area": 331212.0,
+    "population": 97338583,
+    "currency": "VND"
+  },
+  "french_polynesia": {
+    "name": "French Polynesia",
+    "capital": "Papeetē",
+    "area": 4167.0,
+    "population": 280904,
+    "currency": "XPF"
+  },
+  "tokelau": {
+    "name": "Tokelau",
+    "capital": "Fakaofo",
+    "area": 12.0,
+    "population": 1411,
+    "currency": "NZD"
+  },
+  "germany": {
+    "name": "Germany",
+    "capital": "Berlin",
+    "area": 357114.0,
+    "population": 83240525,
+    "currency": "EUR"
+  },
+  "uganda": {
+    "name": "Uganda",
+    "capital": "Kampala",
+    "area": 241550.0,
+    "population": 45741000,
+    "currency": "UGX"
+  },
+  "sint_maarten": {
+    "name": "Sint Maarten",
+    "capital": "Philipsburg",
+    "area": 34.0,
+    "population": 40812,
+    "currency": "ANG"
+  },
+  "kazakhstan": {
+    "name": "Kazakhstan",
+    "capital": "Astana",
+    "area": 2724900.0,
+    "population": 18754440,
+    "currency": "KZT"
+  },
+  "northern_mariana_islands": {
+    "name": "Northern Mariana Islands",
+    "capital": "Saipan",
+    "area": 464.0,
+    "population": 57557,
+    "currency": "USD"
+  },
+  "dominica": {
+    "name": "Dominica",
+    "capital": "Roseau",
+    "area": 751.0,
+    "population": 71991,
+    "currency": "XCD"
+  },
+  "south_sudan": {
+    "name": "South Sudan",
+    "capital": "Juba",
+    "area": 619745.0,
+    "population": 11193729,
+    "currency": "SSP"
+  },
+  "american_samoa": {
+    "name": "American Samoa",
+    "capital": "Pago Pago",
+    "area": 199.0,
+    "population": 55197,
+    "currency": "USD"
+  },
+  "pitcairn_islands": {
+    "name": "Pitcairn Islands",
+    "capital": "Adamstown",
+    "area": 47.0,
+    "population": 56,
+    "currency": "NZD"
+  },
+  "tajikistan": {
+    "name": "Tajikistan",
+    "capital": "Dushanbe",
+    "area": 143100.0,
+    "population": 9537642,
+    "currency": "TJS"
+  },
+  "wallis_and_futuna": {
+    "name": "Wallis and Futuna",
+    "capital": "Mata-Utu",
+    "area": 142.0,
+    "population": 11750,
+    "currency": "XPF"
+  },
+  "slovenia": {
+    "name": "Slovenia",
+    "capital": "Ljubljana",
+    "area": 20273.0,
+    "population": 2100126,
+    "currency": "EUR"
+  },
+  "cape_verde": {
+    "name": "Cape Verde",
+    "capital": "Praia",
+    "area": 4033.0,
+    "population": 555988,
+    "currency": "CVE"
+  },
+  "maldives": {
+    "name": "Maldives",
+    "capital": "Malé",
+    "area": 300.0,
+    "population": 540542,
+    "currency": "MVR"
+  },
+  "yemen": {
+    "name": "Yemen",
+    "capital": "Sana'a",
+    "area": 527968.0,
+    "population": 29825968,
+    "currency": "YER"
+  },
+  "north_korea": {
+    "name": "North Korea",
+    "capital": "Pyongyang",
+    "area": 120538.0,
+    "population": 25778815,
+    "currency": "KPW"
+  },
+  "georgia": {
+    "name": "Georgia",
+    "capital": "Tbilisi",
+    "area": 69700.0,
+    "population": 3714000,
+    "currency": "GEL"
+  },
+  "belgium": {
+    "name": "Belgium",
+    "capital": "Brussels",
+    "area": 30528.0,
+    "population": 11555997,
+    "currency": "EUR"
+  },
+  "uzbekistan": {
+    "name": "Uzbekistan",
+    "capital": "Tashkent",
+    "area": 447400.0,
+    "population": 34232050,
+    "currency": "UZS"
+  },
+  "dominican_republic": {
+    "name": "Dominican Republic",
+    "capital": "Santo Domingo",
+    "area": 48671.0,
+    "population": 10847904,
+    "currency": "DOP"
+  },
+  "portugal": {
+    "name": "Portugal",
+    "capital": "Lisbon",
+    "area": 92090.0,
+    "population": 10305564,
+    "currency": "EUR"
+  },
+  "faroe_islands": {
+    "name": "Faroe Islands",
+    "capital": "Tórshavn",
+    "area": 1393.0,
+    "population": 48865,
+    "currency": "DKK"
+  },
+  "western_sahara": {
+    "name": "Western Sahara",
+    "capital": "El Aaiún",
+    "area": 266000.0,
+    "population": 510713,
+    "currency": "DZD"
+  },
+  "martinique": {
+    "name": "Martinique",
+    "capital": "Fort-de-France",
+    "area": 1128.0,
+    "population": 378243,
+    "currency": "EUR"
+  },
+  "saint_lucia": {
+    "name": "Saint Lucia",
+    "capital": "Castries",
+    "area": 616.0,
+    "population": 183629,
+    "currency": "XCD"
+  },
+  "mozambique": {
+    "name": "Mozambique",
+    "capital": "Maputo",
+    "area": 801590.0,
+    "population": 31255435,
+    "currency": "MZN"
+  },
+  "thailand": {
+    "name": "Thailand",
+    "capital": "Bangkok",
+    "area": 513120.0,
+    "population": 69799978,
+    "currency": "THB"
+  },
+  "israel": {
+    "name": "Israel",
+    "capital": "Jerusalem",
+    "area": 20770.0,
+    "population": 9216900,
+    "currency": "ILS"
+  },
+  "falkland_islands": {
+    "name": "Falkland Islands",
+    "capital": "Stanley",
+    "area": 12173.0,
+    "population": 2563,
+    "currency": "FKP"
+  },
+  "benin": {
+    "name": "Benin",
+    "capital": "Porto-Novo",
+    "area": 112622.0,
+    "population": 12123198,
+    "currency": "XOF"
+  },
+  "indonesia": {
+    "name": "Indonesia",
+    "capital": "Jakarta",
+    "area": 1904569.0,
+    "population": 273523621,
+    "currency": "IDR"
+  },
+  "papua_new_guinea": {
+    "name": "Papua New Guinea",
+    "capital": "Port Moresby",
+    "area": 462840.0,
+    "population": 8947027,
+    "currency": "PGK"
+  },
+  "bahrain": {
+    "name": "Bahrain",
+    "capital": "Manama",
+    "area": 765.0,
+    "population": 1701583,
+    "currency": "BHD"
+  },
+  "macau": {
+    "name": "Macau",
+    "capital": "",
+    "area": 30.0,
+    "population": 649342,
+    "currency": "MOP"
+  },
+  "greece": {
+    "name": "Greece",
+    "capital": "Athens",
+    "area": 131990.0,
+    "population": 10715549,
+    "currency": "EUR"
+  },
+  "syria": {
+    "name": "Syria",
+    "capital": "Damascus",
+    "area": 185180.0,
+    "population": 17500657,
+    "currency": "SYP"
+  },
+  "central_african_republic": {
+    "name": "Central African Republic",
+    "capital": "Bangui",
+    "area": 622984.0,
+    "population": 4829764,
+    "currency": "XAF"
+  },
+  "guam": {
+    "name": "Guam",
+    "capital": "Hagåtña",
+    "area": 549.0,
+    "population": 168783,
+    "currency": "USD"
+  },
+  "poland": {
+    "name": "Poland",
+    "capital": "Warsaw",
+    "area": 312679.0,
+    "population": 37950802,
+    "currency": "PLN"
+  },
+  "bouvet_island": {
+    "name": "Bouvet Island",
+    "capital": "",
+    "area": 49.0,
+    "population": 0,
+    "currency": ""
+  },
+  "antarctica": {
+    "name": "Antarctica",
+    "capital": "",
+    "area": 14000000.0,
+    "population": 1000,
+    "currency": ""
+  },
+  "united_states": {
+    "name": "United States",
+    "capital": "Washington, D.C.",
+    "area": 9372610.0,
+    "population": 329484123,
+    "currency": "USD"
+  },
+  "zambia": {
+    "name": "Zambia",
+    "capital": "Lusaka",
+    "area": 752612.0,
+    "population": 18383956,
+    "currency": "ZMW"
+  },
+  "kiribati": {
+    "name": "Kiribati",
+    "capital": "South Tarawa",
+    "area": 811.0,
+    "population": 119446,
+    "currency": "AUD"
+  },
+  "peru": {
+    "name": "Peru",
+    "capital": "Lima",
+    "area": 1285216.0,
+    "population": 32971846,
+    "currency": "PEN"
+  },
+  "uruguay": {
+    "name": "Uruguay",
+    "capital": "Montevideo",
+    "area": 181034.0,
+    "population": 3473727,
+    "currency": "UYU"
+  },
+  "anguilla": {
+    "name": "Anguilla",
+    "capital": "The Valley",
+    "area": 91.0,
+    "population": 13452,
+    "currency": "XCD"
+  },
+  "iran": {
+    "name": "Iran",
+    "capital": "Tehran",
+    "area": 1648195.0,
+    "population": 83992953,
+    "currency": "IRR"
+  },
+  "el_salvador": {
+    "name": "El Salvador",
+    "capital": "San Salvador",
+    "area": 21041.0,
+    "population": 6486201,
+    "currency": "USD"
+  },
+  "hungary": {
+    "name": "Hungary",
+    "capital": "Budapest",
+    "area": 93028.0,
+    "population": 9749763,
+    "currency": "HUF"
+  },
+  "samoa": {
+    "name": "Samoa",
+    "capital": "Apia",
+    "area": 2842.0,
+    "population": 198410,
+    "currency": "WST"
+  },
+  "ecuador": {
+    "name": "Ecuador",
+    "capital": "Quito",
+    "area": 276841.0,
+    "population": 17643060,
+    "currency": "USD"
+  },
+  "france": {
+    "name": "France",
+    "capital": "Paris",
+    "area": 551695.0,
+    "population": 67391582,
+    "currency": "EUR"
+  },
+  "nigeria": {
+    "name": "Nigeria",
+    "capital": "Abuja",
+    "area": 923768.0,
+    "population": 206139587,
+    "currency": "NGN"
+  },
+  "india": {
+    "name": "India",
+    "capital": "New Delhi",
+    "area": 3287590.0,
+    "population": 1380004385,
+    "currency": "INR"
+  },
+  "saint_martin": {
+    "name": "Saint Martin",
+    "capital": "Marigot",
+    "area": 53.0,
+    "population": 38659,
+    "currency": "EUR"
+  },
+  "burkina_faso": {
+    "name": "Burkina Faso",
+    "capital": "Ouagadougou",
+    "area": 272967.0,
+    "population": 20903278,
+    "currency": "XOF"
+  },
+  "iraq": {
+    "name": "Iraq",
+    "capital": "Baghdad",
+    "area": 438317.0,
+    "population": 40222503,
+    "currency": "IQD"
+  },
+  "kuwait": {
+    "name": "Kuwait",
+    "capital": "Kuwait City",
+    "area": 17818.0,
+    "population": 4270563,
+    "currency": "KWD"
+  },
+  "czechia": {
+    "name": "Czechia",
+    "capital": "Prague",
+    "area": 78865.0,
+    "population": 10698896,
+    "currency": "CZK"
+  },
+  "montserrat": {
+    "name": "Montserrat",
+    "capital": "Plymouth",
+    "area": 102.0,
+    "population": 4922,
+    "currency": "XCD"
+  },
+  "morocco": {
+    "name": "Morocco",
+    "capital": "Rabat",
+    "area": 446550.0,
+    "population": 36910558,
+    "currency": "MAD"
+  },
+  "new_caledonia": {
+    "name": "New Caledonia",
+    "capital": "Nouméa",
+    "area": 18575.0,
+    "population": 271960,
+    "currency": "XPF"
+  },
+  "gambia": {
+    "name": "Gambia",
+    "capital": "Banjul",
+    "area": 10689.0,
+    "population": 2416664,
+    "currency": "GMD"
+  },
+  "netherlands": {
+    "name": "Netherlands",
+    "capital": "Amsterdam",
+    "area": 41850.0,
+    "population": 16655799,
+    "currency": "EUR"
+  },
+  "saint_pierre_and_miquelon": {
+    "name": "Saint Pierre and Miquelon",
+    "capital": "Saint-Pierre",
+    "area": 242.0,
+    "population": 6069,
+    "currency": "EUR"
+  },
+  "saint_barthélemy": {
+    "name": "Saint Barthélemy",
+    "capital": "Gustavia",
+    "area": 21.0,
+    "population": 4255,
+    "currency": "EUR"
+  },
+  "hong_kong": {
+    "name": "Hong Kong",
+    "capital": "City of Victoria",
+    "area": 1104.0,
+    "population": 7500700,
+    "currency": "HKD"
+  },
+  "china": {
+    "name": "China",
+    "capital": "Beijing",
+    "area": 9706961.0,
+    "population": 1402112000,
+    "currency": "CNY"
+  },
+  "ukraine": {
+    "name": "Ukraine",
+    "capital": "Kyiv",
+    "area": 603500.0,
+    "population": 44134693,
+    "currency": "UAH"
+  },
+  "botswana": {
+    "name": "Botswana",
+    "capital": "Gaborone",
+    "area": 582000.0,
+    "population": 2351625,
+    "currency": "BWP"
+  },
+  "curaçao": {
+    "name": "Curaçao",
+    "capital": "Willemstad",
+    "area": 444.0,
+    "population": 155014,
+    "currency": "ANG"
+  },
+  "serbia": {
+    "name": "Serbia",
+    "capital": "Belgrade",
+    "area": 88361.0,
+    "population": 6908224,
+    "currency": "RSD"
+  },
+  "sweden": {
+    "name": "Sweden",
+    "capital": "Stockholm",
+    "area": 450295.0,
+    "population": 10353442,
+    "currency": "SEK"
+  },
+  "sierra_leone": {
+    "name": "Sierra Leone",
+    "capital": "Freetown",
+    "area": 71740.0,
+    "population": 7976985,
+    "currency": "SLE"
+  },
+  "spain": {
+    "name": "Spain",
+    "capital": "Madrid",
+    "area": 505992.0,
+    "population": 47351567,
+    "currency": "EUR"
+  },
+  "panama": {
+    "name": "Panama",
+    "capital": "Panama City",
+    "area": 75417.0,
+    "population": 4314768,
+    "currency": "PAB"
+  },
+  "singapore": {
+    "name": "Singapore",
+    "capital": "Singapore",
+    "area": 710.0,
+    "population": 5685807,
+    "currency": "SGD"
+  },
+  "laos": {
+    "name": "Laos",
+    "capital": "Vientiane",
+    "area": 236800.0,
+    "population": 7275556,
+    "currency": "LAK"
+  },
+  "malawi": {
+    "name": "Malawi",
+    "capital": "Lilongwe",
+    "area": 118484.0,
+    "population": 19129955,
+    "currency": "MWK"
+  },
+  "burundi": {
+    "name": "Burundi",
+    "capital": "Gitega",
+    "area": 27834.0,
+    "population": 11890781,
+    "currency": "BIF"
+  },
+  "belarus": {
+    "name": "Belarus",
+    "capital": "Minsk",
+    "area": 207600.0,
+    "population": 9398861,
+    "currency": "BYN"
+  },
+  "cayman_islands": {
+    "name": "Cayman Islands",
+    "capital": "George Town",
+    "area": 264.0,
+    "population": 65720,
+    "currency": "KYD"
+  },
+  "malaysia": {
+    "name": "Malaysia",
+    "capital": "Kuala Lumpur",
+    "area": 330803.0,
+    "population": 32365998,
+    "currency": "MYR"
+  },
+  "pakistan": {
+    "name": "Pakistan",
+    "capital": "Islamabad",
+    "area": 881912.0,
+    "population": 220892331,
+    "currency": "PKR"
+  },
+  "argentina": {
+    "name": "Argentina",
+    "capital": "Buenos Aires",
+    "area": 2780400.0,
+    "population": 45376763,
+    "currency": "ARS"
+  },
+  "angola": {
+    "name": "Angola",
+    "capital": "Luanda",
+    "area": 1246700.0,
+    "population": 32866268,
+    "currency": "AOA"
+  },
+  "malta": {
+    "name": "Malta",
+    "capital": "Valletta",
+    "area": 316.0,
+    "population": 525285,
+    "currency": "EUR"
+  },
+  "aruba": {
+    "name": "Aruba",
+    "capital": "Oranjestad",
+    "area": 180.0,
+    "population": 106766,
+    "currency": "AWG"
+  },
+  "paraguay": {
+    "name": "Paraguay",
+    "capital": "Asunción",
+    "area": 406752.0,
+    "population": 7132530,
+    "currency": "PYG"
+  },
+  "guinea-bissau": {
+    "name": "Guinea-Bissau",
+    "capital": "Bissau",
+    "area": 36125.0,
+    "population": 1967998,
+    "currency": "XOF"
+  },
+  "saudi_arabia": {
+    "name": "Saudi Arabia",
+    "capital": "Riyadh",
+    "area": 2149690.0,
+    "population": 34813867,
+    "currency": "SAR"
+  },
+  "gibraltar": {
+    "name": "Gibraltar",
+    "capital": "Gibraltar",
+    "area": 6.0,
+    "population": 33691,
+    "currency": "GIP"
+  },
+  "nicaragua": {
+    "name": "Nicaragua",
+    "capital": "Managua",
+    "area": 130373.0,
+    "population": 6624554,
+    "currency": "NIO"
+  },
+  "ireland": {
+    "name": "Ireland",
+    "capital": "Dublin",
+    "area": 70273.0,
+    "population": 4994724,
+    "currency": "EUR"
+  },
+  "mali": {
+    "name": "Mali",
+    "capital": "Bamako",
+    "area": 1240192.0,
+    "population": 20250834,
+    "currency": "XOF"
+  },
+  "costa_rica": {
+    "name": "Costa Rica",
+    "capital": "San José",
+    "area": 51100.0,
+    "population": 5094114,
+    "currency": "CRC"
+  },
+  "british_indian_ocean_territory": {
+    "name": "British Indian Ocean Territory",
+    "capital": "Diego Garcia",
+    "area": 60.0,
+    "population": 3000,
+    "currency": "USD"
+  },
+  "mongolia": {
+    "name": "Mongolia",
+    "capital": "Ulan Bator",
+    "area": 1564110.0,
+    "population": 3278292,
+    "currency": "MNT"
+  },
+  "french_guiana": {
+    "name": "French Guiana",
+    "capital": "Cayenne",
+    "area": 83534.0,
+    "population": 254541,
+    "currency": "EUR"
+  },
+  "canada": {
+    "name": "Canada",
+    "capital": "Ottawa",
+    "area": 9984670.0,
+    "population": 38005238,
+    "currency": "CAD"
+  },
+  "cook_islands": {
+    "name": "Cook Islands",
+    "capital": "Avarua",
+    "area": 236.0,
+    "population": 18100,
+    "currency": "CKD"
+  },
+  "estonia": {
+    "name": "Estonia",
+    "capital": "Tallinn",
+    "area": 45227.0,
+    "population": 1331057,
+    "currency": "EUR"
+  },
+  "trinidad_and_tobago": {
+    "name": "Trinidad and Tobago",
+    "capital": "Port of Spain",
+    "area": 5130.0,
+    "population": 1399491,
+    "currency": "TTD"
+  },
+  "cocos_keeling_islands": {
+    "name": "Cocos (Keeling) Islands",
+    "capital": "West Island",
+    "area": 14.0,
+    "population": 544,
+    "currency": "AUD"
+  },
+  "comoros": {
+    "name": "Comoros",
+    "capital": "Moroni",
+    "area": 1862.0,
+    "population": 869595,
+    "currency": "KMF"
+  },
+  "christmas_island": {
+    "name": "Christmas Island",
+    "capital": "Flying Fish Cove",
+    "area": 135.0,
+    "population": 2072,
+    "currency": "AUD"
+  },
+  "timor-leste": {
+    "name": "Timor-Leste",
+    "capital": "Dili",
+    "area": 14874.0,
+    "population": 1318442,
+    "currency": "USD"
+  },
+  "denmark": {
+    "name": "Denmark",
+    "capital": "Copenhagen",
+    "area": 43094.0,
+    "population": 5831404,
+    "currency": "DKK"
+  },
+  "north_macedonia": {
+    "name": "North Macedonia",
+    "capital": "Skopje",
+    "area": 25713.0,
+    "population": 2077132,
+    "currency": "MKD"
+  },
+  "bangladesh": {
+    "name": "Bangladesh",
+    "capital": "Dhaka",
+    "area": 147570.0,
+    "population": 164689383,
+    "currency": "BDT"
+  },
+  "mauritius": {
+    "name": "Mauritius",
+    "capital": "Port Louis",
+    "area": 2040.0,
+    "population": 1265740,
+    "currency": "MUR"
+  },
+  "cyprus": {
+    "name": "Cyprus",
+    "capital": "Nicosia",
+    "area": 9251.0,
+    "population": 1207361,
+    "currency": "EUR"
+  },
+  "guernsey": {
+    "name": "Guernsey",
+    "capital": "St. Peter Port",
+    "area": 78.0,
+    "population": 62999,
+    "currency": "GBP"
+  },
+  "brunei": {
+    "name": "Brunei",
+    "capital": "Bandar Seri Begawan",
+    "area": 5765.0,
+    "population": 437483,
+    "currency": "BND"
+  },
+  "japan": {
+    "name": "Japan",
+    "capital": "Tokyo",
+    "area": 377930.0,
+    "population": 125836021,
+    "currency": "JPY"
+  },
+  "azerbaijan": {
+    "name": "Azerbaijan",
+    "capital": "Baku",
+    "area": 86600.0,
+    "population": 10110116,
+    "currency": "AZN"
+  },
+  "bahamas": {
+    "name": "Bahamas",
+    "capital": "Nassau",
+    "area": 13943.0,
+    "population": 393248,
+    "currency": "BSD"
+  },
+  "latvia": {
+    "name": "Latvia",
+    "capital": "Riga",
+    "area": 64559.0,
+    "population": 1901548,
+    "currency": "EUR"
+  },
+  "mayotte": {
+    "name": "Mayotte",
+    "capital": "Mamoudzou",
+    "area": 374.0,
+    "population": 226915,
+    "currency": "EUR"
+  },
+  "afghanistan": {
+    "name": "Afghanistan",
+    "capital": "Kabul",
+    "area": 652230.0,
+    "population": 40218234,
+    "currency": "AFN"
+  },
+  "kyrgyzstan": {
+    "name": "Kyrgyzstan",
+    "capital": "Bishkek",
+    "area": 199951.0,
+    "population": 6591600,
+    "currency": "KGS"
+  },
+  "norfolk_island": {
+    "name": "Norfolk Island",
+    "capital": "Kingston",
+    "area": 36.0,
+    "population": 2302,
+    "currency": "AUD"
+  },
+  "vanuatu": {
+    "name": "Vanuatu",
+    "capital": "Port Vila",
+    "area": 12189.0,
+    "population": 307150,
+    "currency": "VUV"
+  },
+  "united_arab_emirates": {
+    "name": "United Arab Emirates",
+    "capital": "Abu Dhabi",
+    "area": 83600.0,
+    "population": 9890400,
+    "currency": "AED"
+  },
+  "lesotho": {
+    "name": "Lesotho",
+    "capital": "Maseru",
+    "area": 30355.0,
+    "population": 2142252,
+    "currency": "LSL"
+  },
+  "myanmar": {
+    "name": "Myanmar",
+    "capital": "Naypyidaw",
+    "area": 676578.0,
+    "population": 54409794,
+    "currency": "MMK"
+  },
+  "united_kingdom": {
+    "name": "United Kingdom",
+    "capital": "London",
+    "area": 242900.0,
+    "population": 67215293,
+    "currency": "GBP"
+  },
+  "norway": {
+    "name": "Norway",
+    "capital": "Oslo",
+    "area": 323802.0,
+    "population": 5379475,
+    "currency": "NOK"
+  },
+  "réunion": {
+    "name": "Réunion",
+    "capital": "Saint-Denis",
+    "area": 2511.0,
+    "population": 840974,
+    "currency": "EUR"
+  },
+  "south_korea": {
+    "name": "South Korea",
+    "capital": "Seoul",
+    "area": 100210.0,
+    "population": 51780579,
+    "currency": "KRW"
+  },
+  "turks_and_caicos_islands": {
+    "name": "Turks and Caicos Islands",
+    "capital": "Cockburn Town",
+    "area": 948.0,
+    "population": 38718,
+    "currency": "USD"
+  },
+  "djibouti": {
+    "name": "Djibouti",
+    "capital": "Djibouti",
+    "area": 23200.0,
+    "population": 988002,
+    "currency": "DJF"
+  },
+  "australia": {
+    "name": "Australia",
+    "capital": "Canberra",
+    "area": 7692024.0,
+    "population": 25687041,
+    "currency": "AUD"
+  },
+  "marshall_islands": {
+    "name": "Marshall Islands",
+    "capital": "Majuro",
+    "area": 181.0,
+    "population": 59194,
+    "currency": "USD"
+  },
+  "oman": {
+    "name": "Oman",
+    "capital": "Muscat",
+    "area": 309500.0,
+    "population": 5106622,
+    "currency": "OMR"
+  },
+  "nepal": {
+    "name": "Nepal",
+    "capital": "Kathmandu",
+    "area": 147181.0,
+    "population": 29136808,
+    "currency": "NPR"
+  },
+  "niue": {
+    "name": "Niue",
+    "capital": "Alofi",
+    "area": 260.0,
+    "population": 1470,
+    "currency": "NZD"
+  },
+  "togo": {
+    "name": "Togo",
+    "capital": "Lomé",
+    "area": 56785.0,
+    "population": 8278737,
+    "currency": "XOF"
+  },
+  "republic_of_the_congo": {
+    "name": "Republic of the Congo",
+    "capital": "Brazzaville",
+    "area": 342000.0,
+    "population": 5657000,
+    "currency": "XAF"
+  },
+  "madagascar": {
+    "name": "Madagascar",
+    "capital": "Antananarivo",
+    "area": 587041.0,
+    "population": 27691019,
+    "currency": "MGA"
+  },
+  "san_marino": {
+    "name": "San Marino",
+    "capital": "City of San Marino",
+    "area": 61.0,
+    "population": 33938,
+    "currency": "EUR"
+  },
+  "lithuania": {
+    "name": "Lithuania",
+    "capital": "Vilnius",
+    "area": 65300.0,
+    "population": 2794700,
+    "currency": "EUR"
+  },
+  "bhutan": {
+    "name": "Bhutan",
+    "capital": "Thimphu",
+    "area": 38394.0,
+    "population": 771612,
+    "currency": "BTN"
+  },
+  "ivory_coast": {
+    "name": "Ivory Coast",
+    "capital": "Yamoussoukro",
+    "area": 322463.0,
+    "population": 26378275,
+    "currency": "XOF"
+  },
+  "saint_kitts_and_nevis": {
+    "name": "Saint Kitts and Nevis",
+    "capital": "Basseterre",
+    "area": 261.0,
+    "population": 53192,
+    "currency": "XCD"
+  },
+  "switzerland": {
+    "name": "Switzerland",
+    "capital": "Bern",
+    "area": 41284.0,
+    "population": 8654622,
+    "currency": "CHF"
+  },
+  "isle_of_man": {
+    "name": "Isle of Man",
+    "capital": "Douglas",
+    "area": 572.0,
+    "population": 85032,
+    "currency": "GBP"
+  },
+  "monaco": {
+    "name": "Monaco",
+    "capital": "Monaco",
+    "area": 2.02,
+    "population": 39244,
+    "currency": "EUR"
+  },
+  "ghana": {
+    "name": "Ghana",
+    "capital": "Accra",
+    "area": 238533.0,
+    "population": 31072945,
+    "currency": "GHS"
+  },
+  "kosovo": {
+    "name": "Kosovo",
+    "capital": "Pristina",
+    "area": 10908.0,
+    "population": 1775378,
+    "currency": "EUR"
+  },
+  "seychelles": {
+    "name": "Seychelles",
+    "capital": "Victoria",
+    "area": 452.0,
+    "population": 98462,
+    "currency": "SCR"
+  },
+  "grenada": {
+    "name": "Grenada",
+    "capital": "St. George's",
+    "area": 344.0,
+    "population": 112519,
+    "currency": "XCD"
+  },
+  "mauritania": {
+    "name": "Mauritania",
+    "capital": "Nouakchott",
+    "area": 1030700.0,
+    "population": 4649660,
+    "currency": "MRU"
+  },
+  "new_zealand": {
+    "name": "New Zealand",
+    "capital": "Wellington",
+    "area": 270467.0,
+    "population": 5084300,
+    "currency": "NZD"
+  },
+  "guinea": {
+    "name": "Guinea",
+    "capital": "Conakry",
+    "area": 245857.0,
+    "population": 13132792,
+    "currency": "GNF"
+  },
+  "tonga": {
+    "name": "Tonga",
+    "capital": "Nuku'alofa",
+    "area": 747.0,
+    "population": 105697,
+    "currency": "TOP"
+  },
+  "italy": {
+    "name": "Italy",
+    "capital": "Rome",
+    "area": 301336.0,
+    "population": 59554023,
+    "currency": "EUR"
+  },
+  "albania": {
+    "name": "Albania",
+    "capital": "Tirana",
+    "area": 28748.0,
+    "population": 2837743,
+    "currency": "ALL"
+  },
+  "bolivia": {
+    "name": "Bolivia",
+    "capital": "Sucre",
+    "area": 1098581.0,
+    "population": 11673029,
+    "currency": "BOB"
+  },
+  "dr_congo": {
+    "name": "DR Congo",
+    "capital": "Kinshasa",
+    "area": 2344858.0,
+    "population": 108407721,
+    "currency": "CDF"
+  },
+  "palau": {
+    "name": "Palau",
+    "capital": "Ngerulmud",
+    "area": 459.0,
+    "population": 18092,
+    "currency": "USD"
+  },
+  "libya": {
+    "name": "Libya",
+    "capital": "Tripoli",
+    "area": 1759540.0,
+    "population": 6871287,
+    "currency": "LYD"
+  },
+  "puerto_rico": {
+    "name": "Puerto Rico",
+    "capital": "San Juan",
+    "area": 8870.0,
+    "population": 3194034,
+    "currency": "USD"
+  },
+  "russia": {
+    "name": "Russia",
+    "capital": "Moscow",
+    "area": 17098242.0,
+    "population": 144104080,
+    "currency": "RUB"
+  },
+  "chile": {
+    "name": "Chile",
+    "capital": "Santiago",
+    "area": 756102.0,
+    "population": 19116209,
+    "currency": "CLP"
+  },
+  "jordan": {
+    "name": "Jordan",
+    "capital": "Amman",
+    "area": 89342.0,
+    "population": 10203140,
+    "currency": "JOD"
+  },
+  "bermuda": {
+    "name": "Bermuda",
+    "capital": "Hamilton",
+    "area": 54.0,
+    "population": 63903,
+    "currency": "BMD"
+  },
+  "south_africa": {
+    "name": "South Africa",
+    "capital": "Pretoria",
+    "area": 1221037.0,
+    "population": 59308690,
+    "currency": "ZAR"
+  },
+  "sri_lanka": {
+    "name": "Sri Lanka",
+    "capital": "Sri Jayawardenepura Kotte",
+    "area": 65610.0,
+    "population": 21919000,
+    "currency": "LKR"
+  },
+  "antigua_and_barbuda": {
+    "name": "Antigua and Barbuda",
+    "capital": "Saint John's",
+    "area": 442.0,
+    "population": 97928,
+    "currency": "XCD"
+  },
+  "ethiopia": {
+    "name": "Ethiopia",
+    "capital": "Addis Ababa",
+    "area": 1104300.0,
+    "population": 114963583,
+    "currency": "ETB"
+  },
+  "iceland": {
+    "name": "Iceland",
+    "capital": "Reykjavik",
+    "area": 103000.0,
+    "population": 366425,
+    "currency": "ISK"
+  },
+  "guatemala": {
+    "name": "Guatemala",
+    "capital": "Guatemala City",
+    "area": 108889.0,
+    "population": 16858333,
+    "currency": "GTQ"
+  },
+  "tuvalu": {
+    "name": "Tuvalu",
+    "capital": "Funafuti",
+    "area": 26.0,
+    "population": 11792,
+    "currency": "AUD"
+  },
+  "heard_island_and_mcdonald_islands": {
+    "name": "Heard Island and McDonald Islands",
+    "capital": "",
+    "area": 412.0,
+    "population": 0,
+    "currency": ""
+  },
+  "são_tomé_and_príncipe": {
+    "name": "São Tomé and Príncipe",
+    "capital": "São Tomé",
+    "area": 964.0,
+    "population": 219161,
+    "currency": "STN"
+  },
+  "egypt": {
+    "name": "Egypt",
+    "capital": "Cairo",
+    "area": 1002450.0,
+    "population": 102334403,
+    "currency": "EGP"
+  },
+  "bosnia_and_herzegovina": {
+    "name": "Bosnia and Herzegovina",
+    "capital": "Sarajevo",
+    "area": 51209.0,
+    "population": 3280815,
+    "currency": "BAM"
+  },
+  "jersey": {
+    "name": "Jersey",
+    "capital": "Saint Helier",
+    "area": 116.0,
+    "population": 100800,
+    "currency": "GBP"
+  },
+  "luxembourg": {
+    "name": "Luxembourg",
+    "capital": "Luxembourg",
+    "area": 2586.0,
+    "population": 632275,
+    "currency": "EUR"
+  },
+  "guyana": {
+    "name": "Guyana",
+    "capital": "Georgetown",
+    "area": 214969.0,
+    "population": 786559,
+    "currency": "GYD"
+  },
+  "haiti": {
+    "name": "Haiti",
+    "capital": "Port-au-Prince",
+    "area": 27750.0,
+    "population": 11402533,
+    "currency": "HTG"
+  },
+  "qatar": {
+    "name": "Qatar",
+    "capital": "Doha",
+    "area": 11586.0,
+    "population": 2881060,
+    "currency": "QAR"
+  },
+  "svalbard_and_jan_mayen": {
+    "name": "Svalbard and Jan Mayen",
+    "capital": "Longyearbyen",
+    "area": 61399.0,
+    "population": 2562,
+    "currency": "NOK"
+  },
+  "cambodia": {
+    "name": "Cambodia",
+    "capital": "Phnom Penh",
+    "area": 181035.0,
+    "population": 16718971,
+    "currency": "KHR"
+  },
+  "somalia": {
+    "name": "Somalia",
+    "capital": "Mogadishu",
+    "area": 637657.0,
+    "population": 15893219,
+    "currency": "SOS"
+  },
+  "kenya": {
+    "name": "Kenya",
+    "capital": "Nairobi",
+    "area": 580367.0,
+    "population": 53771300,
+    "currency": "KES"
+  },
+  "nauru": {
+    "name": "Nauru",
+    "capital": "Yaren",
+    "area": 21.0,
+    "population": 10834,
+    "currency": "AUD"
+  }
+}
