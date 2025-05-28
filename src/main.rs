@@ -2,7 +2,7 @@ mod ui;
 mod state;
 mod data;
 mod map_draw;
-
+//coloring
 use crossterm::{
     event::{self, DisableMouseCapture, EnableMouseCapture},
     execute,
