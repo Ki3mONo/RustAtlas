@@ -58,8 +58,16 @@ q: wyjście";
                     Panel::Right  => Panel::Left,
                 };
             }
-            Up => if self.selected > 0 { self.selected -= 1 },
-            Down => if self.selected + 1 < self.list_items.len() { self.selected += 1 },
+            Up => {
+                if !self.list_items.is_empty() {
+                    self.selected = (self.selected + self.list_items.len() - 1) % self.list_items.len();
+                }
+            },
+            Down => {
+                if !self.list_items.is_empty() {
+                    self.selected = (self.selected + 1) % self.list_items.len();
+                }
+            },
             Enter => {
                 let choice = self.list_items[self.selected].clone();
                 match self.level {
