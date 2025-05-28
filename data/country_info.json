@@ -713,8 +713,8 @@
     "population": 1000,
     "currency": ""
   },
-  "united_states": {
-    "name": "United States",
+  "united_states_of_america": {
+    "name": "United States of America",
     "capital": "Washington, D.C.",
     "area": 9372610.0,
     "population": 329484123,
