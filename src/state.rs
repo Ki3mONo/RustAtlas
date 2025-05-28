@@ -28,9 +28,7 @@ q: wyjście";
 
     pub fn new(data_dir: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let mut cache = DataCache::new(data_dir)?;
-        // 1) lista kontynentów
         let continents = cache.load_list(GeoLevel::World, "world")?;
-        // 2) mapa świata
         let raw = cache.load_geojson(&GeoLevel::World, "world")?;
         let view = MapView::new(raw, &mut cache)?;
         let count = view.feature_count();
@@ -49,7 +47,6 @@ q: wyjście";
         })
     }
 
-    /// Zwraca true, jeśli trzeba wyjść
     pub fn handle_input(&mut self, key: KeyCode) -> bool {
         use KeyCode::*;
         match key {

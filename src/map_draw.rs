@@ -1,13 +1,10 @@
-use geojson::GeoJson;
-use std::error::Error;
 use geo::{Geometry, MultiPolygon, Polygon};
+use geojson::GeoJson;
+use std::{collections::{HashMap, HashSet}, error::Error};
+use crate::data::DataCache;
 use ratatui::widgets::canvas::{Canvas, Line};
-use ratatui::layout::Rect as TuiRect;
-use ratatui::{Frame, backend::Backend, style::Color};
-use std::collections::{HashMap, HashSet};
-use crate::data::DataCache;  // Add this import
+use ratatui::{layout::Rect as TuiRect, Frame, style::Color};
 
-/// Liczy pole (w przybliżeniu płaskim) wielokąta wzorem shoelace’a.
 fn poly_area(poly: &Polygon<f64>) -> f64 {
     let coords = &poly.exterior().0;
     let mut sum = 0.0;
@@ -19,12 +16,11 @@ fn poly_area(poly: &Polygon<f64>) -> f64 {
     (sum * 0.5).abs()
 }
 
-/// Przygotowanie geometrii i rysowanie mapy
 pub struct MapView {
     items: Vec<(String, MultiPolygon<f64>)>,
     x_bounds: [f64; 2],
     y_bounds: [f64; 2],
-    continents: HashMap<String, HashSet<String>>, // Mapping of continents to countries
+    continents: HashMap<String, HashSet<String>>,
 }
 
 impl MapView {
@@ -48,7 +44,6 @@ impl MapView {
                         _ => continue,
                     };
 
-                    // Filtrujemy drobne fragmenty, jeśli jest ich wiele
                     if mp.0.len() > 1 {
                         let orig: Vec<Polygon<f64>> = mp.0.clone();
                         let areas: Vec<f64> = orig.iter().map(poly_area).collect();
@@ -69,7 +64,6 @@ impl MapView {
             }
         }
 
-        // Ustal zakresy współrzędnych
         let (mut minx, mut miny, mut maxx, mut maxy) =
             (f64::INFINITY, f64::INFINITY, f64::NEG_INFINITY, f64::NEG_INFINITY);
         for (_, mp) in &items {
@@ -85,37 +79,29 @@ impl MapView {
             }
         }
 
-        // Load continent mappings from data cache
-        let continents = match data_cache.load_continent_mappings() {
-            Ok(mappings) => mappings,
-            Err(e) => {
-                eprintln!("Warning: Could not load continent mappings: {}", e);
-                HashMap::new() // Fallback to empty mappings
-            }
-        };
-        
+        let continents = data_cache.load_continent_mappings().unwrap_or_default();
         Ok(Self { items, x_bounds: [minx, maxx], y_bounds: [miny, maxy], continents })
     }
 
-    /// Liczba obiektów (np. krajów)
     pub fn feature_count(&self) -> usize {
         self.items.len()
     }
 
-    /// Rysuje mapę, najpierw wszystkie granice, a potem podświetla jeden wybrany
-    pub fn render<B: Backend>(
+    pub fn render<'a>(
         &self,
-        f: &mut Frame<B>,
+        f: &mut Frame<'a>,
         area: TuiRect,
         title: &str,
         highlight: Option<&str>,
     ) {
         let canvas = Canvas::default()
-            .block(ratatui::widgets::Block::default().title(title).borders(ratatui::widgets::Borders::ALL))
+            .block(ratatui::widgets::Block::default()
+                .title(title)
+                .borders(ratatui::widgets::Borders::ALL))
             .x_bounds(self.x_bounds)
             .y_bounds(self.y_bounds)
             .paint(|ctx| {
-                // 1) Rysujemy wszystkie granice w białym
+                // 1) rysuj granice wszystkich polygonów
                 for (_, mp) in &self.items {
                     for poly in &mp.0 {
                         for window in poly.exterior().0.windows(2) {
@@ -128,12 +114,9 @@ impl MapView {
                         }
                     }
                 }
-
-                // 2) Podświetlamy wybrany obiekt na czerwono
+                // 2) podświetlenie na czerwono…
                 if let Some(sel) = highlight {
-                    // Check if the selection is a continent
                     if let Some(countries) = self.continents.get(sel) {
-                        // Highlight all countries that belong to this continent
                         for (name, mp) in &self.items {
                             if countries.contains(name) {
                                 for poly in &mp.0 {
@@ -149,7 +132,6 @@ impl MapView {
                             }
                         }
                     } else {
-                        // Original code for highlighting a single country/object
                         for (name, mp) in &self.items {
                             if name == sel {
                                 for poly in &mp.0 {

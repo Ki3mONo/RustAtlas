@@ -1,5 +1,4 @@
 use ratatui::{
-    backend::Backend,
     layout::{Constraint, Direction, Layout},
     style::{Color, Style},
     widgets::{Block, Borders, List, ListItem, ListState, Paragraph},
@@ -7,11 +6,11 @@ use ratatui::{
 };
 use crate::state::AppState;
 
-pub fn draw<B: Backend>(f: &mut Frame<B>, state: &mut AppState) {
+pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     let chunks = Layout::default()
         .direction(Direction::Horizontal)
         .constraints([Constraint::Percentage(20), Constraint::Percentage(60), Constraint::Percentage(20)].as_ref())
-        .split(f.size());
+        .split(f.area());
 
     // Lewy panel: lista
     let items: Vec<ListItem> = state.list_items.iter().map(|i| ListItem::new(i.clone())).collect();
@@ -33,7 +32,7 @@ pub fn draw<B: Backend>(f: &mut Frame<B>, state: &mut AppState) {
         f.render_widget(txt, chunks[1]);
     }
 
-    // Prawy panel: informacje lub dane kraju
+    // Prawy panel: informacje
     let info_block = if let Some(ci) = &state.country_info {
         let txt = format!(
             "{}\nStolica: {}\nPowierzchnia: {:.0} km²\nLudność: {}\nWaluta: {}",
