@@ -4,6 +4,8 @@ use geo::{Geometry, MultiPolygon, Polygon};
 use ratatui::widgets::canvas::{Canvas, Line};
 use ratatui::layout::Rect as TuiRect;
 use ratatui::{Frame, backend::Backend, style::Color};
+use std::collections::{HashMap, HashSet};
+use crate::data::DataCache;  // Add this import
 
 /// Liczy pole (w przybliżeniu płaskim) wielokąta wzorem shoelace’a.
 fn poly_area(poly: &Polygon<f64>) -> f64 {
@@ -22,10 +24,11 @@ pub struct MapView {
     items: Vec<(String, MultiPolygon<f64>)>,
     x_bounds: [f64; 2],
     y_bounds: [f64; 2],
+    continents: HashMap<String, HashSet<String>>, // Mapping of continents to countries
 }
 
 impl MapView {
-    pub fn new(raw: GeoJson) -> Result<Self, Box<dyn Error>> {
+    pub fn new(raw: GeoJson, data_cache: &mut DataCache) -> Result<Self, Box<dyn Error>> {
         let mut items = Vec::new();
 
         if let GeoJson::FeatureCollection(fc) = raw {
@@ -82,7 +85,16 @@ impl MapView {
             }
         }
 
-        Ok(Self { items, x_bounds: [minx, maxx], y_bounds: [miny, maxy] })
+        // Load continent mappings from data cache
+        let continents = match data_cache.load_continent_mappings() {
+            Ok(mappings) => mappings,
+            Err(e) => {
+                eprintln!("Warning: Could not load continent mappings: {}", e);
+                HashMap::new() // Fallback to empty mappings
+            }
+        };
+        
+        Ok(Self { items, x_bounds: [minx, maxx], y_bounds: [miny, maxy], continents })
     }
 
     /// Liczba obiektów (np. krajów)
@@ -119,16 +131,36 @@ impl MapView {
 
                 // 2) Podświetlamy wybrany obiekt na czerwono
                 if let Some(sel) = highlight {
-                    for (name, mp) in &self.items {
-                        if name == sel {
-                            for poly in &mp.0 {
-                                for window in poly.exterior().0.windows(2) {
-                                    let a = window[0];
-                                    let b = window[1];
-                                    ctx.draw(&Line { x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: Color::Red });
+                    // Check if the selection is a continent
+                    if let Some(countries) = self.continents.get(sel) {
+                        // Highlight all countries that belong to this continent
+                        for (name, mp) in &self.items {
+                            if countries.contains(name) {
+                                for poly in &mp.0 {
+                                    for window in poly.exterior().0.windows(2) {
+                                        let a = window[0];
+                                        let b = window[1];
+                                        ctx.draw(&Line { x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: Color::Red });
+                                    }
+                                    if let (Some(first), Some(last)) = (poly.exterior().0.first(), poly.exterior().0.last()) {
+                                        ctx.draw(&Line { x1: last.x, y1: last.y, x2: first.x, y2: first.y, color: Color::Red });
+                                    }
                                 }
-                                if let (Some(first), Some(last)) = (poly.exterior().0.first(), poly.exterior().0.last()) {
-                                    ctx.draw(&Line { x1: last.x, y1: last.y, x2: first.x, y2: first.y, color: Color::Red });
+                            }
+                        }
+                    } else {
+                        // Original code for highlighting a single country/object
+                        for (name, mp) in &self.items {
+                            if name == sel {
+                                for poly in &mp.0 {
+                                    for window in poly.exterior().0.windows(2) {
+                                        let a = window[0];
+                                        let b = window[1];
+                                        ctx.draw(&Line { x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: Color::Red });
+                                    }
+                                    if let (Some(first), Some(last)) = (poly.exterior().0.first(), poly.exterior().0.last()) {
+                                        ctx.draw(&Line { x1: last.x, y1: last.y, x2: first.x, y2: first.y, color: Color::Red });
+                                    }
                                 }
                             }
                         }
