@@ -1,7 +1,7 @@
 use serde::Deserialize;
 use serde_json::from_slice;
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, HashMap, HashSet},
     fs,
     path::{Path, PathBuf},
     str::FromStr,
@@ -75,5 +75,26 @@ impl DataCache {
     pub fn load_country_info(&self, key: &str) -> Option<&CountryInfo> {
         let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
         self.country_info.as_ref()?.get(&skey)
+    }
+
+    /// Load all continent-country mappings
+    pub fn load_continent_mappings(&mut self) -> Result<HashMap<String, HashSet<String>>, Box<dyn std::error::Error>> {
+        let mut result = HashMap::new();
+        
+        // First load the list of continents
+        let continents = self.load_list(GeoLevel::World, "world")?;
+        
+        // Then load the country list for each continent
+        for continent in continents {
+            match self.load_list(GeoLevel::Continent, &continent) {
+                Ok(countries) => {
+                    // Convert Vec<String> to HashSet<String>
+                    result.insert(continent, countries.into_iter().collect());
+                },
+                Err(e) => eprintln!("Warning: Could not load countries for {}: {}", continent, e)
+            }
+        }
+        
+        Ok(result)
     }
 }

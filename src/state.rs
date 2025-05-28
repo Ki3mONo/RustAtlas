@@ -32,7 +32,7 @@ q: wyjście";
         let continents = cache.load_list(GeoLevel::World, "world")?;
         // 2) mapa świata
         let raw = cache.load_geojson(&GeoLevel::World, "world")?;
-        let view = MapView::new(raw)?;
+        let view = MapView::new(raw, &mut cache)?;
         let count = view.feature_count();
         let info = format!("Świat – {} obiektów\n\n{}", count, Self::HELP_TEXT);
 
@@ -74,7 +74,7 @@ q: wyjście";
                             self.list_items = items;
                             self.selected = 0;
                             if let Ok(raw) = self.cache.load_geojson(&GeoLevel::Continent, &choice) {
-                                if let Ok(view) = MapView::new(raw) {
+                                if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let count = view.feature_count();
                                     self.map = Some(view);
                                     self.info = format!("{} – {} obiektów\n\n{}", choice, count, Self::HELP_TEXT);
@@ -92,7 +92,7 @@ q: wyjście";
                             self.list_items = vec![choice.clone()];
                             self.selected = 0;
                             if let Ok(raw) = self.cache.load_geojson(&GeoLevel::Country, &choice) {
-                                if let Ok(view) = MapView::new(raw) {
+                                if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let count = view.feature_count();
                                     self.map = Some(view);
                                     self.country_info = self.cache.load_country_info(&choice).cloned();
@@ -118,7 +118,7 @@ q: wyjście";
                                 self.selected = cts.iter().position(|s| s == &prev_key).unwrap_or(0);
                             }
                             if let Ok(raw) = self.cache.load_geojson(&GeoLevel::World, "world") {
-                                if let Ok(view) = MapView::new(raw) {
+                                if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let count = view.feature_count();
                                     self.map = Some(view);
                                     self.info = format!("Świat – {} obiektów\n\n{}", count, Self::HELP_TEXT);
@@ -133,7 +133,7 @@ q: wyjście";
                                 self.selected = items.iter().position(|s| s == &prev_key).unwrap_or(0);
                             }
                             if let Ok(raw) = self.cache.load_geojson(&GeoLevel::Continent, &prev_key) {
-                                if let Ok(view) = MapView::new(raw) {
+                                if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let count = view.feature_count();
                                     self.map = Some(view);
                                     self.info = format!("{} – {} obiektów\n\n{}", prev_key, count, Self::HELP_TEXT);
