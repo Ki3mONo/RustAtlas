@@ -1,0 +1,7 @@
+# ─── Force Rust as the language for your source files ───────────────────────────
+*.rs       linguist-language=Rust
+Cargo.toml linguist-language=Rust
+
+# ─── Don’t count GeoJSON/JSON data in the breakdown ─────────────────────────────
+*.geojson                       linguist-generated
+*.json                          linguist-generated
