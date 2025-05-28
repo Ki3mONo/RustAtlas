@@ -2,9 +2,9 @@ mod ui;
 mod state;
 mod data;
 mod map_draw;
-//coloring
+
 use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture},
+    event::{self, Event, KeyEvent, KeyEventKind, DisableMouseCapture, EnableMouseCapture},
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -22,8 +22,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     loop {
         terminal.draw(|f| ui::draw(f, &mut state))?;
-        if let event::Event::Key(key) = event::read()? {
-            if state.handle_input(key.code) { break; }
+
+        if event::poll(std::time::Duration::from_millis(100))? {
+            if let Event::Key(KeyEvent { code, kind: KeyEventKind::Press, .. }) = event::read()? {
+                if state.handle_input(code) {
+                    break;
+                }
+            }
         }
     }
 

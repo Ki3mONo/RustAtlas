@@ -37,14 +37,12 @@ impl DataCache {
     pub fn new<P: AsRef<Path>>(base: P) -> Result<Self, Box<dyn std::error::Error>> {
         let base = base.as_ref().to_path_buf();
         fs::create_dir_all(&base)?;
-        // Spróbuj wczytać country_info.json
         let country_info = fs::read(base.join("country_info.json"))
             .ok()
             .and_then(|b| from_slice::<BTreeMap<String, CountryInfo>>(&b).ok());
         Ok(Self { base, index: BTreeMap::new(), country_info })
     }
 
-    /// Wczytaj listę `<prefix>_<key>.json`
     pub fn load_list(&mut self, level: GeoLevel, key: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
         let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
         let filename = format!("{}_{}.json", match level {
@@ -58,7 +56,6 @@ impl DataCache {
         Ok(list)
     }
 
-    /// Wczytaj `<prefix>_<key>.geojson`
     pub fn load_geojson(&self, level: &GeoLevel, key: &str) -> Result<GeoJson, Box<dyn std::error::Error>> {
         let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
         let prefix = match level {
@@ -71,30 +68,19 @@ impl DataCache {
         Ok(GeoJson::from_str(&txt)?)
     }
 
-    /// Zwraca dane o kraju po jego kluczu (snake_case)
     pub fn load_country_info(&self, key: &str) -> Option<&CountryInfo> {
         let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
         self.country_info.as_ref()?.get(&skey)
     }
 
-    /// Load all continent-country mappings
     pub fn load_continent_mappings(&mut self) -> Result<HashMap<String, HashSet<String>>, Box<dyn std::error::Error>> {
         let mut result = HashMap::new();
-        
-        // First load the list of continents
         let continents = self.load_list(GeoLevel::World, "world")?;
-        
-        // Then load the country list for each continent
         for continent in continents {
-            match self.load_list(GeoLevel::Continent, &continent) {
-                Ok(countries) => {
-                    // Convert Vec<String> to HashSet<String>
-                    result.insert(continent, countries.into_iter().collect());
-                },
-                Err(e) => eprintln!("Warning: Could not load countries for {}: {}", continent, e)
+            if let Ok(countries) = self.load_list(GeoLevel::Continent, &continent) {
+                result.insert(continent, countries.into_iter().collect());
             }
         }
-        
         Ok(result)
     }
 }
