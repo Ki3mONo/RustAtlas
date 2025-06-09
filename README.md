@@ -103,4 +103,4 @@
 
 ---
 
-*Project developed as part of the "Programming in Rust" course, Computer Science, AGH University of Science and Technology, 2025.*
+*Project developed as part of the "Programming in Rust" course, Computer Science, AGH University of Krakow, 2025.*
