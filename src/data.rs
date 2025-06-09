@@ -7,6 +7,7 @@ use std::{
     str::FromStr,
 };
 use geojson::GeoJson;
+use rand::{Rng, rng};
 
 /// Poziomy: świat → kontynent → kraj
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -26,21 +27,29 @@ pub struct CountryInfo {
     pub currency: String,
 }
 
-/// Proste ładowanie list (.json), geojson i danych krajów
+/// Proste ładowanie list (.json), geojson, danych krajów i ciekawostek
 pub struct DataCache {
     base: PathBuf,
     index: BTreeMap<(GeoLevel, String), Vec<String>>,
     country_info: Option<BTreeMap<String, CountryInfo>>,
+    funfacts: BTreeMap<String, Vec<String>>,  // ← wszystkie ciekawostki
 }
 
 impl DataCache {
     pub fn new<P: AsRef<Path>>(base: P) -> Result<Self, Box<dyn std::error::Error>> {
         let base = base.as_ref().to_path_buf();
         fs::create_dir_all(&base)?;
+
         let country_info = fs::read(base.join("country_info.json"))
             .ok()
             .and_then(|b| from_slice::<BTreeMap<String, CountryInfo>>(&b).ok());
-        Ok(Self { base, index: BTreeMap::new(), country_info })
+
+        let funfacts = fs::read(base.join("funfacts.json"))
+            .ok()
+            .and_then(|b| from_slice::<BTreeMap<String, Vec<String>>>(&b).ok())
+            .unwrap_or_default();
+
+        Ok(Self { base, index: BTreeMap::new(), country_info, funfacts })
     }
 
     pub fn load_list(&mut self, level: GeoLevel, key: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
@@ -71,6 +80,20 @@ impl DataCache {
     pub fn load_country_info(&self, key: &str) -> Option<&CountryInfo> {
         let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
         self.country_info.as_ref()?.get(&skey)
+    }
+
+    /// Wybiera losowo jedną ciekawostkę dla danego klucza
+    pub fn random_funfact(&self, key: &str) -> Option<String> {
+        let skey = key.to_lowercase().replace(' ', "_");
+        self.funfacts.get(&skey).and_then(|v| {
+            if v.is_empty() {
+                None
+            } else {
+                let mut rng = rng();
+                let idx = rng.random_range(0..v.len());
+                Some(v[idx].clone())
+            }
+        })
     }
 
     pub fn load_continent_mappings(&mut self) -> Result<HashMap<String, HashSet<String>>, Box<dyn std::error::Error>> {
