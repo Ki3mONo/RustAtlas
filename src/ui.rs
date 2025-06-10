@@ -142,7 +142,7 @@ fn draw_gdp_chart<'a>(f: &mut Frame<'a>, state: &AppState) {
     // Create the chart
     let dataset = Dataset::default()
         .name(format!("GDP of {}", country_name))
-        .marker(symbols::Marker::Dot)
+        .marker(symbols::Marker::Bar)
         .style(Style::default().fg(Color::Green))
         .data(&data_points);
     
