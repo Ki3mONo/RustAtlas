@@ -4,6 +4,16 @@
 
 ---
 
+## Screenshots
+
+![RustAtlas Main Interface](screenshots/menu.png)
+*Main interface showing country selection and map*
+
+![RustAtlas GDP Chart](screenshots/GDP.png)
+*GDP historical data visualization*
+
+---
+
 ## Features
 
 * **Hierarchical Navigation**: Explore data at three levels:
@@ -16,11 +26,14 @@
 
 * **Detailed Country Info**: Display capital, area, population, and currency for each country (loaded from a JSON data source).
 
+* **GDP Data Visualization**: View historical GDP data from World Bank for selected countries, with both summary and detailed chart views.
+
 * **Keyboard Controls**:
 
     * `↑` / `↓`: Move selection up/down in lists.
     * `Enter`: Dive into the selected geographic level.
     * `Esc` / `Backspace`: Go back to the previous level.
+    * `Tab`: Toggle GDP chart display for the selected country.
     * `q`: Quit the application.
 
 * **State Persistence**: Keeps a navigation history to allow seamless backward navigation.
@@ -44,6 +57,7 @@
         * `world.geojson` and `continent_{name}.geojson` files for drawing.
         * `continent_{name}.json` and `country_{name}.json` lists of names.
         * `country_info.json` containing a map of country keys to metadata.
+        * `gdp_data.csv` containing World Bank GDP data (from https://data.worldbank.org/indicator/NY.GDP.MKTP.CD).
 
 3. **Build & Run**:
 
@@ -81,6 +95,10 @@
   }
   ```
 
+* **GDP Data**:
+  
+  The application uses GDP data from the World Bank (https://data.worldbank.org/indicator/NY.GDP.MKTP.CD) in CSV format. The data includes GDP values in current USD for countries across multiple years.
+
 ---
 
 ## Architecture Overview
@@ -90,6 +108,7 @@
 * **`map_draw.rs`**: Converts GeoJSON into `geo` library types, filters polygons, computes bounds, and draws shapes using `ratatui::widgets::canvas::Canvas`.
 * **`state.rs`**: Defines `AppState` to track current level, selection, navigation history, loaded map, and UI panels.
 * **`ui.rs`**: Composes the terminal layout: left list panel, center map canvas, and right info panel.
+* **`gdp_reader.rs`**: Parses and processes GDP data from World Bank CSV format.
 
 ---
 
