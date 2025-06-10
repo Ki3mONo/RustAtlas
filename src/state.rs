@@ -30,10 +30,11 @@ pub struct AppState {
 impl AppState {
     // Help instructions shown in the info panel
     const HELP_TEXT: &'static str = "\
-↑/↓: move selection
-Enter: drill down (world → continent → country)
-Esc / Backspace: go back
-q: quit";
+↑/↓: ruch w liście
+Enter: zagłębienie
+(świat → kontynent → kraj)
+Esc / Backspace: wstecz
+q: wyjście";
 
     /// Initialize application state: load data, map, and help text
     pub fn new<P: AsRef<Path>>(dir: P) -> Result<Self, Box<dyn std::error::Error>> {
@@ -48,7 +49,7 @@ q: quit";
         let raw = cache.load_geojson(&GeoLevel::World, "world")?;
         let view = MapView::new(raw, &mut cache)?;
         let count = view.feature_count();
-        let info = format!("World – {} features\n\n{}", count, Self::HELP_TEXT);
+        let info = format!("World – {} obiektów\n\n{}", count, Self::HELP_TEXT);
 
         Ok(Self {
             cache,
@@ -131,7 +132,7 @@ q: quit";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("{} – {} features\n\n{}", choice, cnt, Self::HELP_TEXT);
+                                    self.info = format!("{} – {} obiektów\n\n{}", choice, cnt, Self::HELP_TEXT);
                                 }
                             }
                             self.country_info = None;
@@ -150,7 +151,7 @@ q: quit";
                                     self.map = Some(view);
                                     self.country_info = self.cache.load_country_info(&choice).cloned();
                                     self.fun_fact = self.cache.random_funfact(&choice);
-                                    self.info = format!("{} – 1 feature\n\n{}", choice, Self::HELP_TEXT);
+                                    self.info = format!("{} – 1 obiektów\n\n{}", choice, Self::HELP_TEXT);
                                     self.update_gdp(&choice);
                                 }
                             }
@@ -179,7 +180,7 @@ q: quit";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("World – {} features\n\n{}", cnt, Self::HELP_TEXT);
+                                    self.info = format!("World – {} obiektów\n\n{}", cnt, Self::HELP_TEXT);
                                 }
                             }
                         }
@@ -192,7 +193,7 @@ q: quit";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("{} – {} features\n\n{}", prev_key, cnt, Self::HELP_TEXT);
+                                    self.info = format!("{} – {} obiektów\n\n{}", prev_key, cnt, Self::HELP_TEXT);
                                 }
                             }
                         }

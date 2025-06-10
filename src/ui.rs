@@ -34,7 +34,7 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     let mut ls = ListState::default();
     ls.select(Some(state.selected));
     let list = List::new(items)
-        .block(Block::default().borders(Borders::ALL).title("Selection"))
+        .block(Block::default().borders(Borders::ALL).title("Wybierz"))
         .highlight_symbol(">> ")
         .highlight_style(Style::default().fg(Color::Red));
     f.render_stateful_widget(list, chunks[0], &mut ls);
@@ -44,7 +44,7 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         let name = &state.list_items[state.selected];
         map.render(f, chunks[1], name, Some(name.as_str()));
     } else {
-        let placeholder = Paragraph::new("Select an item to view the map")
+        let placeholder = Paragraph::new("Wybierz kraj, aby zobaczyć mapę")
             .block(Block::default().borders(Borders::ALL).title("Map"))
             .wrap(Wrap { trim: true });
         f.render_widget(placeholder, chunks[1]);
@@ -63,14 +63,14 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     // Info block: show country details or default help text
     let info_text = if let Some(ci) = &state.country_info {
         format!(
-            "{}\nCapital: {}\nArea: {:.0} km²\nPopulation: {}\nCurrency: {}",
+            "{}\nStolica: {}\nPowierzchnia: {:.0} km²\nPopulacja: {}\nWaluta: {}",
             ci.name, ci.capital, ci.area, ci.population, ci.currency
         )
     } else {
         state.info.clone()
     };
     let info = Paragraph::new(info_text)
-        .block(Block::default().borders(Borders::ALL).title("Info"))
+        .block(Block::default().borders(Borders::ALL).title("Informacje"))
         .wrap(Wrap { trim: true });
     f.render_widget(info, right_chunks[0]);
 
@@ -78,12 +78,12 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     let gdp_text = state.current_gdp.as_ref()
         .map(|(year, value)| {
             format!(
-                "GDP ({}):\n{}\nPress Tab to view chart!",
+                "GDP dla ({}):\n{}\nWciśnij tab aby zobaczyć wykres!",
                 year,
                 GDPData::format_gdp_value(*value)
             )
         })
-        .unwrap_or_else(|| "Select a country to view GDP data".to_string());
+        .unwrap_or_else(|| "Wybierz kraj aby zobaczyć dane GDP".to_string());
     let gdp = Paragraph::new(gdp_text)
         .block(Block::default().borders(Borders::ALL).title("GDP"))
         .style(Style::default().fg(Color::White))
@@ -93,9 +93,9 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     // Fun fact block: random fact or prompt to select a country
     let fact_text = state.fun_fact
         .as_deref()
-        .unwrap_or("Select a country to view a fun fact");
+        .unwrap_or("Wybierz kraj, aby zobaczyć ciekawostkę");
     let fact = Paragraph::new(fact_text)
-        .block(Block::default().borders(Borders::ALL).title("Did you know? (PL Version)"))
+        .block(Block::default().borders(Borders::ALL).title("Czy wiesz, że ..."))
         .style(Style::default().fg(Color::White))
         .wrap(Wrap { trim: true });
     f.render_widget(fact, right_chunks[2]);
@@ -144,14 +144,14 @@ fn draw_gdp_chart<'a>(f: &mut Frame<'a>, state: &AppState) {
         .block(
             Block::default()
                 .title(format!(
-                    "{} GDP History (Press Tab to return to map view)",
+                    "Historia GDP dla {} (Wciśnij Tab aby wrócić do widoku mapy!)",
                     country
                 ))
                 .borders(Borders::ALL),
         )
         .x_axis(
             Axis::default()
-                .title("Year")
+                .title("Rok")
                 .style(Style::default().fg(Color::Gray))
                 .bounds([min_year, max_year])
                 .labels(x_labels),

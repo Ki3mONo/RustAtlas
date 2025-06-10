@@ -97,11 +97,11 @@ impl GDPData {
     /// Format a GDP value into a human-friendly string with units.
     pub fn format_gdp_value(val: f64) -> String {
         if val >= 1e12 {
-            format!("{:.2} trillion USD", val / 1e12)
+            format!("{:.2} bln USD", val / 1e12)
         } else if val >= 1e9 {
-            format!("{:.2} billion USD", val / 1e9)
+            format!("{:.2} mld USD", val / 1e9)
         } else if val >= 1e6 {
-            format!("{:.2} million USD", val / 1e6)
+            format!("{:.2} mln USD", val / 1e6)
         } else {
             format!("{:.2} USD", val)
         }
