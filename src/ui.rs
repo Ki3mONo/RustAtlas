@@ -40,13 +40,14 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         f.render_widget(txt, chunks[1]);
     }
 
-    // Prawy panel: Informacje + Czy wiesz, że...
+    // Prawy panel: Informacje + PKB + Czy wiesz, że...
     let right = chunks[2];
     let right_chunks = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
-            Constraint::Percentage(60),
             Constraint::Percentage(40),
+            Constraint::Percentage(30),
+            Constraint::Percentage(30),
         ].as_ref())
         .split(right);
 
@@ -64,6 +65,13 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         .wrap(Wrap { trim: true });
     f.render_widget(info_paragraph, right_chunks[0]);
 
+    // -- Wykres PKB (pusty placeholder)
+    let gdp_placeholder = Paragraph::new("Miejsce na wykres PKB")
+        .block(Block::default().borders(Borders::ALL).title("PKB"))
+        .style(Style::default().fg(Color::White))
+        .wrap(Wrap { trim: true });
+    f.render_widget(gdp_placeholder, right_chunks[1]);
+
     // — Czy wiesz, że...
     let fact_txt = state.fun_fact
         .as_deref()
@@ -72,5 +80,5 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         .block(Block::default().borders(Borders::ALL).title("Czy wiesz, że..."))
         .style(Style::default().fg(Color::White))
         .wrap(Wrap { trim: true });
-    f.render_widget(fact_paragraph, right_chunks[1]);
+    f.render_widget(fact_paragraph, right_chunks[2]);
 }
