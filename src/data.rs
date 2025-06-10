@@ -25,7 +25,6 @@ pub struct CountryInfo {
     pub area: f64,
     pub population: u64,
     pub currency: String,
-    pub gdp: Option<f64>,  // Added GDP field as optional
 }
 
 /// Proste ładowanie list (.json), geojson, danych krajów i ciekawostek

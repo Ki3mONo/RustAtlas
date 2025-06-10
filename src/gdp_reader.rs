@@ -111,6 +111,34 @@ impl GDPData {
         latest_year.map(|year| (year, latest_value))
     }
     
+    pub fn get_all_gdp_data(&self, country_name: &str) -> Option<HashMap<String, f64>> {
+        // Try exact match first
+        let mut code = self.country_codes.get(country_name);
+        
+        // If that fails, try lowercase match
+        if code.is_none() {
+            code = self.country_codes.get(&country_name.to_lowercase());
+        }
+        
+        // If still no match, try fuzzy matching
+        if code.is_none() {
+            for available_name in &self.country_names {
+                if available_name.contains(country_name) || country_name.contains(available_name) {
+                    code = self.country_codes.get(available_name);
+                    if code.is_some() {
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Get GDP data for this country if we found a code
+        let code = code?;
+        let gdp_data = self.data.get(code)?;
+        
+        Some(gdp_data.clone())
+    }
+    
     pub fn format_gdp_value(value: f64) -> String {
         if value >= 1_000_000_000_000.0 {
             format!("{:.2} bln USD", value / 1_000_000_000_000.0)
@@ -120,14 +148,6 @@ impl GDPData {
             format!("{:.2} mln USD", value / 1_000_000.0)
         } else {
             format!("{:.2} USD", value)
-        }
-    }
-    
-    // Add this helper method for debugging
-    pub fn print_available_countries(&self) {
-        eprintln!("Available countries in GDP data:");
-        for name in &self.country_names {
-            eprintln!("  - {}", name);
         }
     }
 }
