@@ -5,6 +5,7 @@ use crate::{
     gdp_reader::GDPData,
 };
 use std::path::Path;
+use std::collections::HashMap;
 
 #[derive(PartialEq)]
 pub enum Panel { Left, Center, Right }
@@ -22,6 +23,8 @@ pub struct AppState {
     pub active_panel: Panel,
     pub gdp_data: Option<GDPData>,
     pub current_gdp: Option<(String, f64)>,
+    pub gdp_chart_active: bool,
+    pub all_gdp_data: Option<HashMap<String, f64>>, // Year -> Value
 }
 
 impl AppState {
@@ -62,6 +65,8 @@ q: wyjście";
             active_panel: Panel::Left,
             gdp_data,
             current_gdp: None,
+            gdp_chart_active: false,
+            all_gdp_data: None,
         })
     }
 
@@ -76,15 +81,33 @@ q: wyjście";
         match key {
             Char('q') => return true,
             Tab => {
-                self.active_panel = match self.active_panel {
-                    Panel::Left   => Panel::Center,
-                    Panel::Center => Panel::Right,
-                    Panel::Right  => Panel::Left,
-                };
+                // If we're viewing a country and have GDP data, show the chart
+                if self.level == GeoLevel::Country && self.current_gdp.is_some() {
+                    // Toggle GDP chart mode
+                    self.gdp_chart_active = !self.gdp_chart_active;
+                    
+                    // If turning on chart mode, fetch all GDP data for the country
+                    if self.gdp_chart_active && self.gdp_data.is_some() {
+                        let country_name = &self.list_items[self.selected];
+                        self.all_gdp_data = self.gdp_data.as_ref()
+                            .and_then(|data| data.get_all_gdp_data(country_name));
+                    }
+                } else {
+                    // Original panel cycling behavior
+                    self.active_panel = match self.active_panel {
+                        Panel::Left   => Panel::Center,
+                        Panel::Center => Panel::Right,
+                        Panel::Right  => Panel::Left,
+                    };
+                }
             }
             Up => if self.selected > 0 { self.selected -= 1 },
             Down => if self.selected + 1 < self.list_items.len() { self.selected += 1 },
             Enter => {
+                // Skip if in chart mode
+                if self.gdp_chart_active {
+                    return false;
+                }
                 let choice = self.list_items[self.selected].clone();
                 match self.level {
                     GeoLevel::World => {
@@ -126,6 +149,10 @@ q: wyjście";
                 }
             }
             Backspace | Esc => {
+                // Skip if in chart mode - only Tab works to exit the chart
+                if self.gdp_chart_active {
+                    return false;
+                }
                 if let Some((prev_lvl, prev_key)) = self.history.pop() {
                     self.country_info = None;
                     self.fun_fact = None;
