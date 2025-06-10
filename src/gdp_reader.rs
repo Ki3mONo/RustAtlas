@@ -1,153 +1,109 @@
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::Path;
 
+/// Holds GDP values by country code and provides lookup by country name.
 pub struct GDPData {
-    // Country code -> (year -> value)
-    data: HashMap<String, HashMap<String, f64>>,
-    // Country name -> country code (both original and lowercase for better matching)
+    /// Map from ISO country code to a sorted map of year -> GDP value.
+    data: HashMap<String, BTreeMap<u16, f64>>,
+    /// Map from country name (original and lowercase) to ISO country code.
     country_codes: HashMap<String, String>,
-    // For debugging
+    /// List of original country names for simple fuzzy matching.
     country_names: Vec<String>,
 }
 
 impl GDPData {
+    /// Load GDP CSV, skipping 5 header lines, and build in-memory data structures.
     pub fn new<P: AsRef<Path>>(csv_path: P) -> io::Result<Self> {
         let file = File::open(csv_path)?;
         let reader = BufReader::new(file);
         let mut lines = reader.lines();
-        
-        // Skip header lines
-        for _ in 0..5 {
-            let _ = lines.next();
-        }
-        
+
+        // Skip metadata headers
+        for _ in 0..5 { let _ = lines.next(); }
+
         let mut data = HashMap::new();
         let mut country_codes = HashMap::new();
         let mut country_names = Vec::new();
-        
-        // Process data lines
-        for line_result in lines {
-            if let Ok(line) = line_result {
-                let parts: Vec<&str> = line.split(',').collect();
-                if parts.len() < 5 {
-                    continue;
-                }
-                
-                // Extract country info
-                let country_name = parts[0].trim_matches('"');
-                let country_code = parts[1].trim_matches('"');
-                
-                country_codes.insert(country_name.to_string(), country_code.to_string());
-                // Also insert lowercase version for case-insensitive matching
-                country_codes.insert(country_name.to_lowercase(), country_code.to_string());
-                country_names.push(country_name.to_string());
-                
-                // Create year->value map for this country
-                let mut year_values = HashMap::new();
-                
-                // Start from index 4 which is year 1960
-                for (i, value) in parts.iter().enumerate().skip(4) {
-                    if i >= 68 { // Don't go beyond 2024
-                        break;
-                    }
-                    
-                    let year = (1960 + (i - 4)).to_string();
-                    let value = value.trim_matches('"');
-                    
-                    if !value.is_empty() {
-                        if let Ok(gdp) = value.parse::<f64>() {
-                            year_values.insert(year, gdp);
-                        }
+
+        // Parse each line as country, code, and yearly GDP values
+        for line in lines.flatten() {
+            let parts: Vec<&str> = line.split(',').collect();
+            if parts.len() < 5 { continue; }
+
+            let name = parts[0].trim_matches('"');
+            let code = parts[1].trim_matches('"');
+
+            // Register exact and lowercase name lookups
+            country_codes.insert(name.to_string(), code.to_string());
+            country_codes.insert(name.to_lowercase(), code.to_string());
+            country_names.push(name.to_string());
+
+            let mut by_year = BTreeMap::new();
+            // Years start at 1960 from the fifth column
+            for (i, raw) in parts.iter().enumerate().skip(4) {
+                let year = 1960 + (i - 4);
+                if year > 2024 { break; }
+                let s = raw.trim_matches('"');
+                if !s.is_empty() {
+                    if let Ok(val) = s.parse::<f64>() {
+                        by_year.insert(year as u16, val);
                     }
                 }
-                
-                data.insert(country_code.to_string(), year_values);
             }
+
+            data.insert(code.to_string(), by_year);
         }
-        
-        eprintln!("Loaded GDP data for {} countries", country_names.len());
-        
+
         Ok(Self { data, country_codes, country_names })
     }
-    
-    pub fn get_latest_gdp(&self, country_name: &str) -> Option<(String, f64)> {
-        // Try exact match first
-        let mut code = self.country_codes.get(country_name);
-        
-        // If that fails, try lowercase match
-        if code.is_none() {
-            code = self.country_codes.get(&country_name.to_lowercase());
+
+    /// Resolve a country name to its ISO code via exact, lowercase, or substring match.
+    fn find_country_code(&self, query: &str) -> Option<&String> {
+        // Try exact match
+        if let Some(code) = self.country_codes.get(query) {
+            return Some(code);
         }
-        
-        // If still no match, try fuzzy matching
-        if code.is_none() {
-            for available_name in &self.country_names {
-                if available_name.contains(country_name) || country_name.contains(available_name) {
-                    code = self.country_codes.get(available_name);
-                    if code.is_some() {
-                        break;
-                    }
+        // Try lowercase match
+        let lc = query.to_lowercase();
+        if let Some(code) = self.country_codes.get(&lc) {
+            return Some(code);
+        }
+        // Fallback to simple substring fuzzy match
+        for name in &self.country_names {
+            if name.contains(query) || query.contains(name) {
+                if let Some(code) = self.country_codes.get(name) {
+                    return Some(code);
                 }
             }
         }
-        
-        // Get GDP data for this country if we found a code
-        let code = code?;
-        let gdp_data = self.data.get(code)?;
-        
-        // Find latest year with data
-        let mut latest_year = None;
-        let mut latest_value = 0.0;
-        
-        for (year, value) in gdp_data {
-            if latest_year.is_none() || year > latest_year.as_ref().unwrap() {
-                latest_year = Some(year.clone());
-                latest_value = *value;
-            }
-        }
-        
-        latest_year.map(|year| (year, latest_value))
+        None
     }
-    
-    pub fn get_all_gdp_data(&self, country_name: &str) -> Option<HashMap<String, f64>> {
-        // Try exact match first
-        let mut code = self.country_codes.get(country_name);
-        
-        // If that fails, try lowercase match
-        if code.is_none() {
-            code = self.country_codes.get(&country_name.to_lowercase());
-        }
-        
-        // If still no match, try fuzzy matching
-        if code.is_none() {
-            for available_name in &self.country_names {
-                if available_name.contains(country_name) || country_name.contains(available_name) {
-                    code = self.country_codes.get(available_name);
-                    if code.is_some() {
-                        break;
-                    }
-                }
-            }
-        }
-        
-        // Get GDP data for this country if we found a code
-        let code = code?;
-        let gdp_data = self.data.get(code)?;
-        
-        Some(gdp_data.clone())
+
+    /// Get the most recent year and GDP value for a given country name.
+    pub fn get_latest_gdp(&self, country_name: &str) -> Option<(u16, f64)> {
+        let code = self.find_country_code(country_name)?;
+        let years = self.data.get(code)?;
+        years.iter().next_back().map(|(&y, &v)| (y, v))
     }
-    
-    pub fn format_gdp_value(value: f64) -> String {
-        if value >= 1_000_000_000_000.0 {
-            format!("{:.2} bln USD", value / 1_000_000_000_000.0)
-        } else if value >= 1_000_000_000.0 {
-            format!("{:.2} mld USD", value / 1_000_000_000.0)
-        } else if value >= 1_000_000.0 {
-            format!("{:.2} mln USD", value / 1_000_000.0)
+
+    /// Access the full year -> GDP map for charting purposes.
+    pub fn get_all_gdp_data(&self, country_name: &str) -> Option<&BTreeMap<u16, f64>> {
+        let code = self.find_country_code(country_name)?;
+        self.data.get(code)
+    }
+
+    /// Format a GDP value into a human-friendly string with units.
+    pub fn format_gdp_value(val: f64) -> String {
+        if val >= 1e12 {
+            format!("{:.2} trillion USD", val / 1e12)
+        } else if val >= 1e9 {
+            format!("{:.2} billion USD", val / 1e9)
+        } else if val >= 1e6 {
+            format!("{:.2} million USD", val / 1e6)
         } else {
-            format!("{:.2} USD", value)
+            format!("{:.2} USD", val)
         }
     }
 }
