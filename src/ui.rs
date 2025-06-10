@@ -77,7 +77,7 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
 
     // -- PKB
     let gdp_text = state.current_gdp.as_ref()
-        .map(|(year, value)| format!("PKB ({}):\n{}\nTab: wykres", year, GDPData::format_gdp_value(*value)))
+        .map(|(year, value)| format!("PKB ({}):\n{}\nKliknij Tab i zobacz wykres!", year, GDPData::format_gdp_value(*value)))
         .unwrap_or_else(|| "Wybierz kraj, aby zobaczyć dane PKB".to_string());
     
     let gdp_paragraph = Paragraph::new(gdp_text)
