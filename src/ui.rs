@@ -1,7 +1,7 @@
 use ratatui::{
     layout::{Constraint, Direction, Layout},
     style::{Color, Style},
-    widgets::{Block, Borders, List, ListItem, ListState, Paragraph},
+    widgets::{Block, Borders, List, ListItem, ListState, Paragraph, Wrap},
     Frame,
 };
 use crate::state::AppState;
@@ -9,11 +9,18 @@ use crate::state::AppState;
 pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     let chunks = Layout::default()
         .direction(Direction::Horizontal)
-        .constraints([Constraint::Percentage(20), Constraint::Percentage(60), Constraint::Percentage(20)].as_ref())
+        .constraints([
+            Constraint::Percentage(20),
+            Constraint::Percentage(60),
+            Constraint::Percentage(20),
+        ].as_ref())
         .split(f.area());
 
     // Lewy panel: lista
-    let items: Vec<ListItem> = state.list_items.iter().map(|i| ListItem::new(i.clone())).collect();
+    let items: Vec<ListItem> = state.list_items
+        .iter()
+        .map(|i| ListItem::new(i.clone()))
+        .collect();
     let mut list_state = ListState::default();
     list_state.select(Some(state.selected));
     let list = List::new(items)
@@ -28,22 +35,42 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         map.render(f, chunks[1], name, Some(name.as_str()));
     } else {
         let txt = Paragraph::new("Wybierz jednostkę, aby zobaczyć mapę")
-            .block(Block::default().borders(Borders::ALL).title("Mapa"));
+            .block(Block::default().borders(Borders::ALL).title("Mapa"))
+            .wrap(Wrap { trim: true });
         f.render_widget(txt, chunks[1]);
     }
 
-    // Prawy panel: informacje
-    let info_block = if let Some(ci) = &state.country_info {
-        let txt = format!(
+    // Prawy panel: Informacje + Czy wiesz, że...
+    let right = chunks[2];
+    let right_chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([
+            Constraint::Percentage(60),
+            Constraint::Percentage(40),
+        ].as_ref())
+        .split(right);
+
+    // — Informacje
+    let info_text = if let Some(ci) = &state.country_info {
+        format!(
             "{}\nStolica: {}\nPowierzchnia: {:.0} km²\nLudność: {}\nWaluta: {}",
             ci.name, ci.capital, ci.area, ci.population, ci.currency
-        );
-        Paragraph::new(txt)
+        )
     } else {
-        Paragraph::new(state.info.as_str())
+        state.info.clone()
     };
-    f.render_widget(
-        info_block.block(Block::default().borders(Borders::ALL).title("Informacje")),
-        chunks[2],
-    );
+    let info_paragraph = Paragraph::new(info_text)
+        .block(Block::default().borders(Borders::ALL).title("Informacje"))
+        .wrap(Wrap { trim: true });
+    f.render_widget(info_paragraph, right_chunks[0]);
+
+    // — Czy wiesz, że...
+    let fact_txt = state.fun_fact
+        .as_deref()
+        .unwrap_or("Wybierz kraj, aby zobaczyć ciekawostkę");
+    let fact_paragraph = Paragraph::new(fact_txt)
+        .block(Block::default().borders(Borders::ALL).title("Czy wiesz, że..."))
+        .style(Style::default().fg(Color::White))
+        .wrap(Wrap { trim: true });
+    f.render_widget(fact_paragraph, right_chunks[1]);
 }

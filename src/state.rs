@@ -16,6 +16,7 @@ pub struct AppState {
     pub map: Option<MapView>,
     pub info: String,
     pub country_info: Option<CountryInfo>,
+    pub fun_fact: Option<String>,
     pub active_panel: Panel,
 }
 
@@ -43,6 +44,7 @@ q: wyjście";
             map: Some(view),
             info,
             country_info: None,
+            fun_fact: None,
             active_panel: Panel::Left,
         })
     }
@@ -64,7 +66,6 @@ q: wyjście";
                 let choice = self.list_items[self.selected].clone();
                 match self.level {
                     GeoLevel::World => {
-                        // świat → kontynent
                         if let Ok(items) = self.cache.load_list(GeoLevel::Continent, &choice) {
                             self.history.push((GeoLevel::World, choice.clone()));
                             self.level = GeoLevel::Continent;
@@ -76,13 +77,12 @@ q: wyjście";
                                     self.map = Some(view);
                                     self.info = format!("{} – {} obiektów\n\n{}", choice, count, Self::HELP_TEXT);
                                     self.country_info = None;
+                                    self.fun_fact = None;
                                 }
                             }
                         }
                     }
                     GeoLevel::Continent => {
-                        // kontynent → kraj
-                        // pobierz nazwę kontynentu z ostatniego wpisu historii
                         if let Some((_, continent)) = self.history.last() {
                             self.history.push((GeoLevel::Continent, continent.clone()));
                             self.level = GeoLevel::Country;
@@ -93,22 +93,21 @@ q: wyjście";
                                     let count = view.feature_count();
                                     self.map = Some(view);
                                     self.country_info = self.cache.load_country_info(&choice).cloned();
-                                    self.info = format!("{} – {} obiektów\n\n{}", choice, count, Self::HELP_TEXT);
+                                    self.fun_fact   = self.cache.random_funfact(&choice);
+                                    self.info       = format!("{} – {} obiektów\n\n{}", choice, count, Self::HELP_TEXT);
                                 }
                             }
                         }
                     }
-                    GeoLevel::Country => {
-                        // Enter nic nie robi
-                    }
+                    GeoLevel::Country => {}
                 }
             }
             Backspace | Esc => {
                 if let Some((prev_lvl, prev_key)) = self.history.pop() {
                     self.country_info = None;
+                    self.fun_fact = None;
                     match prev_lvl {
                         GeoLevel::World => {
-                            // wracamy do świata
                             if let Ok(cts) = self.cache.load_list(GeoLevel::World, "world") {
                                 self.level = GeoLevel::World;
                                 self.list_items = cts.clone();
@@ -123,7 +122,6 @@ q: wyjście";
                             }
                         }
                         GeoLevel::Continent => {
-                            // wracamy do widoku kontynentu
                             self.level = GeoLevel::Continent;
                             if let Ok(items) = self.cache.load_list(GeoLevel::Continent, &prev_key) {
                                 self.list_items = items.clone();
@@ -137,9 +135,7 @@ q: wyjście";
                                 }
                             }
                         }
-                        GeoLevel::Country => {
-                            // nie powinno się zdarzyć
-                        }
+                        GeoLevel::Country => {}
                     }
                 }
             }
