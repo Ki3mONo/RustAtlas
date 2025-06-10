@@ -2,7 +2,9 @@ use crossterm::event::KeyCode;
 use crate::{
     data::{CountryInfo, DataCache, GeoLevel},
     map_draw::MapView,
+    gdp_reader::GDPData,
 };
+use std::path::Path;
 
 #[derive(PartialEq)]
 pub enum Panel { Left, Center, Right }
@@ -18,6 +20,8 @@ pub struct AppState {
     pub country_info: Option<CountryInfo>,
     pub fun_fact: Option<String>,
     pub active_panel: Panel,
+    pub gdp_data: Option<GDPData>,
+    pub current_gdp: Option<(String, f64)>,
 }
 
 impl AppState {
@@ -27,8 +31,18 @@ Enter: zagłębienie (świat→kontynent→kraj)
 Esc / Backspace: wstecz
 q: wyjście";
 
-    pub fn new(data_dir: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        let mut cache = DataCache::new(data_dir)?;
+    pub fn new<P: AsRef<Path>>(dir: P) -> Result<Self, Box<dyn std::error::Error>> {
+        let base_dir = dir.as_ref();
+        let mut cache = DataCache::new(base_dir)?;
+        
+        // Load GDP data if available
+        let gdp_path = base_dir.join("dataPKB/pkb.csv");
+        
+        let gdp_data = match GDPData::new(&gdp_path) {
+            Ok(data) => Some(data),
+            Err(_) => None
+        };
+        
         let continents = cache.load_list(GeoLevel::World, "world")?;
         let raw = cache.load_geojson(&GeoLevel::World, "world")?;
         let view = MapView::new(raw, &mut cache)?;
@@ -46,7 +60,15 @@ q: wyjście";
             country_info: None,
             fun_fact: None,
             active_panel: Panel::Left,
+            gdp_data,
+            current_gdp: None,
         })
+    }
+
+    fn update_gdp(&mut self, country_name: &str) {
+        if let Some(gdp_data) = &self.gdp_data {
+            self.current_gdp = gdp_data.get_latest_gdp(country_name);
+        }
     }
 
     pub fn handle_input(&mut self, key: KeyCode) -> bool {
@@ -95,6 +117,7 @@ q: wyjście";
                                     self.country_info = self.cache.load_country_info(&choice).cloned();
                                     self.fun_fact   = self.cache.random_funfact(&choice);
                                     self.info       = format!("{} – {} obiektów\n\n{}", choice, count, Self::HELP_TEXT);
+                                    self.update_gdp(&choice);
                                 }
                             }
                         }
@@ -106,6 +129,8 @@ q: wyjście";
                 if let Some((prev_lvl, prev_key)) = self.history.pop() {
                     self.country_info = None;
                     self.fun_fact = None;
+                    self.current_gdp = None;  // Add this line to clear GDP data
+                    
                     match prev_lvl {
                         GeoLevel::World => {
                             if let Ok(cts) = self.cache.load_list(GeoLevel::World, "world") {

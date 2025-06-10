@@ -5,6 +5,8 @@ use ratatui::{
     Frame,
 };
 use crate::state::AppState;
+use crate::gdp_reader::GDPData;
+use crate::data::GeoLevel; // Add this import
 
 pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
     let chunks = Layout::default()
@@ -65,12 +67,16 @@ pub fn draw<'a>(f: &mut Frame<'a>, state: &mut AppState) {
         .wrap(Wrap { trim: true });
     f.render_widget(info_paragraph, right_chunks[0]);
 
-    // -- Wykres PKB (pusty placeholder)
-    let gdp_placeholder = Paragraph::new("Miejsce na wykres PKB")
+    // -- PKB
+    let gdp_text = state.current_gdp.as_ref()
+        .map(|(year, value)| format!("PKB ({}):\n{}", year, GDPData::format_gdp_value(*value)))
+        .unwrap_or_else(|| "Wybierz kraj, aby zobaczyć dane PKB".to_string());
+    
+    let gdp_paragraph = Paragraph::new(gdp_text)
         .block(Block::default().borders(Borders::ALL).title("PKB"))
         .style(Style::default().fg(Color::White))
         .wrap(Wrap { trim: true });
-    f.render_widget(gdp_placeholder, right_chunks[1]);
+    f.render_widget(gdp_paragraph, right_chunks[1]);
 
     // — Czy wiesz, że...
     let fact_txt = state.fun_fact

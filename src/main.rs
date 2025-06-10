@@ -2,6 +2,7 @@ mod ui;
 mod state;
 mod data;
 mod map_draw;
+mod gdp_reader; // Add this line
 
 use crossterm::{
     event::{self, Event, KeyEvent, KeyEventKind, DisableMouseCapture, EnableMouseCapture},
