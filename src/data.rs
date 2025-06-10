@@ -7,9 +7,9 @@ use std::{
     str::FromStr,
 };
 use geojson::GeoJson;
-use rand::{Rng, rng};
+use rand::{rng, Rng};
 
-/// Poziomy: świat → kontynent → kraj
+/// Geographic hierarchy levels: world -> continent -> country
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum GeoLevel {
     World,
@@ -17,7 +17,7 @@ pub enum GeoLevel {
     Country,
 }
 
-/// Dane o kraju ładowane z country_info.json
+/// Metadata for a country loaded from `country_info.json`
 #[derive(Clone, Debug, Deserialize)]
 pub struct CountryInfo {
     pub name: String,
@@ -27,23 +27,26 @@ pub struct CountryInfo {
     pub currency: String,
 }
 
-/// Proste ładowanie list (.json), geojson, danych krajów i ciekawostek
+/// Caches loaded data: directory base, index of lists, optional country info, and fun facts
 pub struct DataCache {
     base: PathBuf,
     index: BTreeMap<(GeoLevel, String), Vec<String>>,
     country_info: Option<BTreeMap<String, CountryInfo>>,
-    funfacts: BTreeMap<String, Vec<String>>,  // ← wszystkie ciekawostki
+    funfacts: BTreeMap<String, Vec<String>>,
 }
 
 impl DataCache {
+    /// Create a new DataCache, ensuring base directory and loading JSON files if present
     pub fn new<P: AsRef<Path>>(base: P) -> Result<Self, Box<dyn std::error::Error>> {
         let base = base.as_ref().to_path_buf();
         fs::create_dir_all(&base)?;
 
+        // Attempt to load country metadata
         let country_info = fs::read(base.join("country_info.json"))
             .ok()
             .and_then(|b| from_slice::<BTreeMap<String, CountryInfo>>(&b).ok());
 
+        // Load fun facts or default to empty map
         let funfacts = fs::read(base.join("funfacts.json"))
             .ok()
             .and_then(|b| from_slice::<BTreeMap<String, Vec<String>>>(&b).ok())
@@ -52,50 +55,53 @@ impl DataCache {
         Ok(Self { base, index: BTreeMap::new(), country_info, funfacts })
     }
 
+    /// Load a JSON list for the given level and key, caching the result
     pub fn load_list(&mut self, level: GeoLevel, key: &str) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-        let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
-        let filename = format!("{}_{}.json", match level {
-            GeoLevel::World     => "continent",
-            GeoLevel::Continent => "country",
-            GeoLevel::Country   => "country",
-        }, skey);
+        let skey = key.to_lowercase().replace(' ', "_").replace(['(', ')'], "");
+        let prefix = match level {
+            GeoLevel::World => "continent",
+            GeoLevel::Continent | GeoLevel::Country => "country",
+        };
+        let filename = format!("{}_{}.json", prefix, skey);
         let data = fs::read(self.base.join(&filename))?;
         let list: Vec<String> = from_slice(&data)?;
         self.index.insert((level, key.to_string()), list.clone());
         Ok(list)
     }
 
+    /// Load GeoJSON data for the specified level and key
     pub fn load_geojson(&self, level: &GeoLevel, key: &str) -> Result<GeoJson, Box<dyn std::error::Error>> {
-        let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
+        let skey = key.to_lowercase().replace(' ', "_").replace(['(', ')'], "");
         let prefix = match level {
-            GeoLevel::World     => "continent",
-            GeoLevel::Continent => "country",
-            GeoLevel::Country   => "country",
+            GeoLevel::World => "continent",
+            GeoLevel::Continent | GeoLevel::Country => "country",
         };
         let filename = format!("{}_{}.geojson", prefix, skey);
         let txt = fs::read_to_string(self.base.join(&filename))?;
         Ok(GeoJson::from_str(&txt)?)
     }
 
+    /// Retrieve country metadata by key, if loaded
     pub fn load_country_info(&self, key: &str) -> Option<&CountryInfo> {
-        let skey = key.to_lowercase().replace(' ', "_").replace('(', "").replace(')', "");
+        let skey = key.to_lowercase().replace(' ', "_").replace(['(', ')'], "");
         self.country_info.as_ref()?.get(&skey)
     }
 
-    /// Wybiera losowo jedną ciekawostkę dla danego klucza
+    /// Return a random fun fact for the given key, if available (1 of 3)
     pub fn random_funfact(&self, key: &str) -> Option<String> {
         let skey = key.to_lowercase().replace(' ', "_");
-        self.funfacts.get(&skey).and_then(|v| {
-            if v.is_empty() {
+        self.funfacts.get(&skey).and_then(|facts| {
+            if facts.is_empty() {
                 None
             } else {
                 let mut rng = rng();
-                let idx = rng.random_range(0..v.len());
-                Some(v[idx].clone())
+                let idx = rng.random_range(0..facts.len());
+                Some(facts[idx].clone())
             }
         })
     }
 
+    /// Build a mapping of continents to their countries
     pub fn load_continent_mappings(&mut self) -> Result<HashMap<String, HashSet<String>>, Box<dyn std::error::Error>> {
         let mut result = HashMap::new();
         let continents = self.load_list(GeoLevel::World, "world")?;
