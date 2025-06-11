@@ -49,7 +49,7 @@ q: wyjście";
         let raw = cache.load_geojson(&GeoLevel::World, "world")?;
         let view = MapView::new(raw, &mut cache)?;
         let count = view.feature_count();
-        let info = format!("World – {} obiektów\n\n{}", count, Self::HELP_TEXT);
+        let info = format!("World – {} krajów\n\n{}", count, Self::HELP_TEXT);
 
         Ok(Self {
             cache,
@@ -132,7 +132,7 @@ q: wyjście";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("{} – {} obiektów\n\n{}", choice, cnt, Self::HELP_TEXT);
+                                    self.info = format!("{} – {} krajów\n\n{}", choice, cnt, Self::HELP_TEXT);
                                 }
                             }
                             self.country_info = None;
@@ -151,7 +151,7 @@ q: wyjście";
                                     self.map = Some(view);
                                     self.country_info = self.cache.load_country_info(&choice).cloned();
                                     self.fun_fact = self.cache.random_funfact(&choice);
-                                    self.info = format!("{} – 1 obiektów\n\n{}", choice, Self::HELP_TEXT);
+                                    self.info = format!("{} – 1 kraj\n\n{}", choice, Self::HELP_TEXT);
                                     self.update_gdp(&choice);
                                 }
                             }
@@ -180,7 +180,7 @@ q: wyjście";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("World – {} obiektów\n\n{}", cnt, Self::HELP_TEXT);
+                                    self.info = format!("Świat – {} krajów\n\n{}", cnt, Self::HELP_TEXT);
                                 }
                             }
                         }
@@ -193,7 +193,7 @@ q: wyjście";
                                 if let Ok(view) = MapView::new(raw, &mut self.cache) {
                                     let cnt = view.feature_count();
                                     self.map = Some(view);
-                                    self.info = format!("{} – {} obiektów\n\n{}", prev_key, cnt, Self::HELP_TEXT);
+                                    self.info = format!("{} – {} krajów\n\n{}", prev_key, cnt, Self::HELP_TEXT);
                                 }
                             }
                         }
